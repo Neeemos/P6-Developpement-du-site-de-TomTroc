@@ -5,13 +5,11 @@ class AdminController
 
     public function connexion(): void
     {
-        $this->checkIfUserIsConnected();
         $view = new View("Connexion");
         $view->render("connexion");
     }
     public function inscription(): void
     {
-        $this->checkIfUserIsConnected();
         $view = new View("Inscription");
         $view->render("inscription");
     }
@@ -93,5 +91,15 @@ class AdminController
         }
 
         Utils::redirect("connexion");
+    }
+
+    /**
+     * Déconnexion de l'utilisateur.
+     * @return void
+     */
+    public function disconnectUser(): void
+    {
+        unset($_SESSION['user']);
+        Utils::redirect("home");
     }
 }
