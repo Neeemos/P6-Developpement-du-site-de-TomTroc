@@ -13,17 +13,29 @@ try {
     switch ($action) {
         // Pages accessibles à tous.
         case 'home':
-            $articleController = new LivreController();
-            $articleController->showHome();
+            $BookController = new BookController();
+            $BookController->showHome();
             break;
         case 'connexion':
             $adminController = new AdminController();
             $adminController->connexion();
             break;
+        case 'postConnexion':
+            $adminController = new AdminController();
+            $adminController->connectUser();
+            break;
         case 'inscription':
-                $adminController = new AdminController();
-                $adminController->inscription();
-                break;
+            $adminController = new AdminController();
+            $adminController->inscription();
+            break;
+        case 'postInscription':
+            $adminController = new AdminController();
+            $adminController->createUser();
+            break;
+        case 'showBooks':
+            $bookController = new BookController();
+            $bookController->showBooks();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

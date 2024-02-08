@@ -2,7 +2,7 @@
     <div class="login__content">
         <div class="login__form form">
             <h1 class="form__title">Connexion</h1>
-            <form action="index.php?action=connexion" method="POST">
+            <form action="index.php?action=postConnexion" method="POST">
                 <div class="form__line">
                     <label for="email" class="form__label">Adresse email</label>
                     <input type="email" id="email" name="email" class="form__input">
