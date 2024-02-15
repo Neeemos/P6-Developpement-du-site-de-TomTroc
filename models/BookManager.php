@@ -30,4 +30,34 @@ class BookManager extends AbstractEntityManager
         return $lastsbooks;
     }
 
+    /**
+     * Récupère le livre par son ID.
+     * @param int $id
+     * @return Book|null
+     */
+    public function getBookById(?int $id = null): ?Book
+    {
+        // Prepare the SQL statement with the WHERE condition
+        $sql = "SELECT livres.*, users.pseudo, users.image AS userImage
+            FROM livres 
+            INNER JOIN users ON livres.user_id = users.id 
+            WHERE livres.id = :id
+            ORDER BY livres.id DESC";
+
+
+        $resultSql = $this->db->query($sql, ["id" => $id]);
+        $resultSql->execute();
+
+        $result = $resultSql->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            return null; // Return null if no book found
+        }
+     
+        // Create a Book object from the fetched data
+        $book = new Book($result);
+
+        return $book;
+    }
+
 }

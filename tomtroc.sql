@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 01 fév. 2024 à 10:57
+-- Généré le : jeu. 15 fév. 2024 à 17:14
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -63,9 +63,11 @@ CREATE TABLE `livres` (
 --
 
 INSERT INTO `livres` (`id`, `user_id`, `title`, `author`, `description`, `available`, `image`) VALUES
-(1, 1, 'Titre Livre 1', 'Auteur 1', 'Description du livre 1', 1, 'image1.jpg'),
-(2, 2, 'Titre Livre 2', 'Auteur 2', 'Description du livre 2', 0, 'image2.jpg'),
-(3, 3, 'Titre Livre 3', 'Auteur 3', 'Description du livre 3', 1, 'image3.jpg');
+(1, 1, 'Titre Livre 1', 'Auteur 1', 'Description du livre 1', 1, 'hamza-nouasria.jpg'),
+(2, 2, 'Titre Livre 2', 'Auteur 2', 'Description du livre 2', 0, 'hamza-nouasria.jpg'),
+(3, 3, 'Titre Livre 3', 'Auteur 3', 'Description du livre 3', 1, 'hamza-nouasria.jpg'),
+(4, 3, 'Titre Livre 3', 'Auteur 3', 'Description du livre 3', 1, 'hamza-nouasria.jpg'),
+(5, 3, 'Titre Livre 3', 'Auteur 3', 'Description du livre 3', 1, 'hamza-nouasria.jpg');
 
 -- --------------------------------------------------------
 
@@ -101,17 +103,19 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
   `num_livre` int(10) DEFAULT NULL,
-  `register_date` datetime DEFAULT NULL
+  `register_date` datetime DEFAULT NULL,
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `pseudo`, `num_livre`, `register_date`) VALUES
-(1, 'utilisateur1@gmail.com', 'motdepasse1', 'pseudo1', 123, '2024-02-01 08:30:00'),
-(2, 'utilisateur2@gmail.com', 'motdepasse2', 'pseudo2', 456, '2024-02-01 09:15:00'),
-(3, 'utilisateur3@gmail.com', 'motdepasse3', 'pseudo3', 789, '2024-02-01 10:00:00');
+INSERT INTO `users` (`id`, `email`, `password`, `pseudo`, `num_livre`, `register_date`, `image`) VALUES
+(1, 'utilisateur1@gmail.com', 'motdepasse1', 'pseudo1', 123, '2024-02-01 08:30:00', 'darwin-vegher.jpg'),
+(2, 'utilisateur2@gmail.com', 'motdepasse2', 'pseudo2', 456, '2024-02-01 09:15:00', 'darwin-vegher.jpg'),
+(3, 'utilisateur3@gmail.com', 'motdepasse3', 'Username3', 789, '2024-02-01 10:00:00', 'darwin-vegher.jpg'),
+(6, 'inscription@inscription.com', '$2y$10$m.IwjLaIRTAoogWavl08feUfEpdlQyFeyP9i.1LXBrsiy5qRyQyOu', 'inscription', 0, '2024-02-06 17:19:21', 'darwin-vegher.jpg');
 
 --
 -- Index pour les tables déchargées
@@ -159,7 +163,7 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT pour la table `livres`
 --
 ALTER TABLE `livres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `messages`
@@ -171,7 +175,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Contraintes pour les tables déchargées

@@ -365,8 +365,102 @@ footer {
   max-width: 50%;
   margin: auto;
 }
+
+
+.showBook  {
+    background-color: var(--gris-clair);;
+    padding-top: 1rem;
+}
+
+.showBook__header {
+    font-size: 10px;
+    margin-bottom: 1rem;
+    margin-left: 17.2%;
+}
+.showBook__link {
+    color: var(--gris-texte);
+    display: inline-block;
+    text-decoration: none;
+}
+
+.book {
+    display: flex;
+    margin-left: 10%;
+}
+
+.book__image {
+    width: 60%;
+    max-height: 850px;
+    object-fit: cover;
+}
+
+.book__content {
+  width: 40%;
+  padding: 50PX 50PX 50px 50px;
+  background-color: #FAF9F7;
+}
+
+.book__title {
+  margin: 0;
+  margin-bottom: 1rem;
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+  font-size: 36px;
+}
+
+.book__author {
+    color: var(--gris-texte);
+    padding-bottom: 32.5px;
+}
+
+.book__soustitle {
+  margin-top: 32.5px;
+  margin-bottom: 1rem;
+  font-family: Inter;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 10px;
+  letter-spacing: 0.08em;
+  text-align: left;
+}
+
+.book__description {
+  font-size: 14px;
+  line-height: 16.94px;
+  white-space: pre-line;
+  max-width: 70%;
+}
+
+.userInformation {
+    background-color: white;
+    border-radius: 114px;
+    padding: 6px 17px 6px 6px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.userInformation__image {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.userInformation__text {
+    font-size: 14px;
+    margin-left: 1rem;
+}
+
+.book__button {
+  width: 60%;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 80px;
+}
 /* Ajout d'un breakpoint à 800px */
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
   .navbar__list {
     flex-direction: column; /* Pour aligner les éléments horizontalement */
   }
@@ -382,4 +476,27 @@ footer {
   .footer__link {
     margin: 2% 0 0 0;
   }
+  .navbar__menu-icon {
+    display: block!important;
 }
+
+.navbar__list {
+    display: none;
+    clear: both;
+}
+
+.navbar__menu-toggle:checked ~ .navbar__list {
+    display: block;
+    
+}
+}
+
+.navbar__menu-toggle {
+  display: none;
+}
+
+.navbar__menu-icon {
+  cursor: pointer;
+  display: none; /* Cacher l'icône de menu par défaut */
+}
+

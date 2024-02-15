@@ -6,7 +6,7 @@ require_once 'config/autoload.php';
 // On récupère l'action demandée par l'utilisateur.
 // Si aucune action n'est demandée, on affiche la page d'accueil.
 $action = Utils::request('action', 'home');
-
+$id = Utils::request('id');
 // Try catch global pour gérer les erreurs
 try {
     // Pour chaque action, on appelle le bon contrôleur et la bonne méthode.
@@ -35,6 +35,10 @@ try {
         case 'showBooks':
             $bookController = new BookController();
             $bookController->showBooks();
+            break;
+        case 'book':
+            $bookController = new BookController();
+            $bookController->showBook($id);
             break;
         case 'logout':
             $adminController = new AdminController();

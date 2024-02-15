@@ -27,4 +27,17 @@ class BookController
         $view = new View('ShowBooks');
         $view->render('showBooks', ['books' => $books]);
     }
+
+    /**
+     * Affiche la page d'un livre.
+     * @param int $id
+     * @return void
+     */
+    public function showBook($id): void
+    {
+        $bookManager = new BookManager();
+        $book = $bookManager->getBookById($id);
+        $view = new View('book');
+        $view->render('book', ['book' => $book]);
+    }
 }

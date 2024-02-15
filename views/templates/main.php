@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -19,19 +21,24 @@
                         alt="Logo officiel de TomTroc" class=""></a>
             </div>
             <div class="navbar__content">
+                <input type="checkbox" id="menu-toggle" class="navbar__menu-toggle">
+                <label for="menu-toggle" class="navbar__menu-icon">&#9776;</label>
                 <ul class="navbar__list">
                     <li
                         class="navbar__item <?= empty($_GET) || (isset($_GET['action']) && !empty($_GET['action'] == "home")) ? 'active' : "" ?>">
                         <a href="index.php?action=home" class="navbar__link">Accueil</a>
                     </li>
-                    <li class="navbar__item">
+                    <li
+                        class="navbar__item <?= empty($_GET) || (isset($_GET['action']) && !empty($_GET['action'] == "showBooks")) ? 'active' : "" ?>">
                         <a href="index.php?action=showBooks" class="navbar__link">Nos livres à l'échange</a>
                     </li>
-                    <li class="navbar__item">
+                    <li
+                        class="navbar__item <?= empty($_GET) || (isset($_GET['action']) && !empty($_GET['action'] == "messagerie")) ? 'active' : "" ?>">
                         <a href="index.php?action=messagerie" class="navbar__link">Messagerie</a>
                     </li>
                     <?php if (isset($_SESSION["user"])) { ?>
-                        <li class="navbar__item">
+                        <li
+                            class="navbar__item <?= empty($_GET) || (isset($_GET['action']) && !empty($_GET['action'] == "profil")) ? 'active' : "" ?>">
                             <a href="index.php?action=profil" class="navbar__link">Mon compte</a>
                         </li>
                         <li>
@@ -44,12 +51,13 @@
                         </li>
                     <?php } ?>
                 </ul>
+
             </div>
         </nav>
     </header>
 
     <main>
-        <?= $content /* Ici est affiché le contenu réel de la page. */?>
+        <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
     </main>
 
     <footer>
