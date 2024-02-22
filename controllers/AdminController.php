@@ -5,11 +5,26 @@ class AdminController
 
     public function connexion(): void
     {
+
+        $email = Utils::request("email");
+        $password = Utils::request("password");
+
+        if (isset($password) && isset($email)) {
+            $this->connectUser();
+        }
         $view = new View("Connexion");
         $view->render("connexion");
     }
     public function inscription(): void
     {
+        $pseudo = Utils::request("pseudo");
+        $password = Utils::request("password");
+        $email = Utils::request("email");
+
+        if (isset($pseudo) && isset($password) && isset($email)) {
+            $this->createUser();
+        }
+
         $view = new View("Inscription");
         $view->render("inscription");
     }
@@ -54,21 +69,12 @@ class AdminController
 
         // On connecte l'utilisateur.
         $_SESSION['user'] = $user;
-        $_SESSION['idUser'] = $user->getId();
-
+        
         // On redirige vers la page d'administration.
         Utils::redirect("home");
     }
     public function createUser(): void
     {
-        $error = [
-            "pseudo" => null,
-            "email" => null,
-            "password" => null
-        ];
-
-        $_SESSION["error"] = $error;
-        // mieux vérifier les erreurs
         $pseudo = Utils::request("pseudo");
         $password = Utils::request("password");
         $email = Utils::request("email");
@@ -87,7 +93,7 @@ class AdminController
         $result = $userManager->createUser($user);
 
         if (!$result) {
-            return;
+            throw new Exception("Utilisateur déja existant");
         }
 
         Utils::redirect("connexion");

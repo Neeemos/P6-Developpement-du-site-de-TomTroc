@@ -3,7 +3,7 @@
         <h1 class="content__title">Rejoignez nos lecteurs passionnés</h1>
         <p class="content__text">Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la
             lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres. </p>
-        <a class="button button-green" href="#">Découvrir</a>
+        <a class="button button-green content__button" href="#">Découvrir</a>
     </div>
     <div class="content">
         <img class="content__img" src="images/hamza-nouasria.jpg" alt="Photo d'Hamza Nousaria">
@@ -15,26 +15,7 @@
 <section class="lastbook">
     <h2 class="lastbook__title">Les derniers livres ajoutés</h2>
     <div class="lastbook__card cardbook">
-        <?php
-
-        foreach ($books as $book) { ?>
-            <a href='index.php?action=book&id=<?= $book->getId() ?>' class='cardbook__link'>
-                <img src='images/<?= $book->getimage() ?>' class="cardbook__image"
-                    alt='image du livre <?= $book->getTitle() ?> '>
-                <div class='cardbook__information'>
-                    <h3 class="cardbook__title">
-                        <?= $book->getTitle() ?>
-                    </h3>
-                    <p class='cardbook__author'>
-                        <?= $book->getAuthor() ?>
-                    </p>
-                    <p class='cardbook__seller'>vendu par :
-                        <?= $book->getPseudo() ?>
-                    </p>
-                </div>
-            </a>
-        <?php }
-        ?>
+        <?php include("views/templates/bookloop.php"); ?>
     </div>
     <a href="index.php?action=showBooks" class="button button-green cardbook__button">Voir tous les livres</a>
 </section>

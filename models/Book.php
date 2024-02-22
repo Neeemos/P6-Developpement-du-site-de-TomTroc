@@ -84,13 +84,13 @@ class Book extends AbstractEntity
         $this->description = $description;
     }
 
-    public function getDisponibility(): string
+    public function getAvailable(): string
     {
-        return $this->disponibility;
+        return $this->available;
     }
 
-    public function setDisponibility(bool $disponibility): void
+    public function setAvailable(bool $available): void
     {
-        $this->disponibility = $disponibility;
+        $this->available = $available;
     }
 }

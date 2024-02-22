@@ -20,17 +20,9 @@ try {
             $adminController = new AdminController();
             $adminController->connexion();
             break;
-        case 'postConnexion':
-            $adminController = new AdminController();
-            $adminController->connectUser();
-            break;
         case 'inscription':
             $adminController = new AdminController();
             $adminController->inscription();
-            break;
-        case 'postInscription':
-            $adminController = new AdminController();
-            $adminController->createUser();
             break;
         case 'showBooks':
             $bookController = new BookController();

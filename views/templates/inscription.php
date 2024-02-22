@@ -2,7 +2,7 @@
     <div class="login__content">
         <div class="login__form form">
             <h1 class="form__title">Inscription</h1>
-            <form action="index.php?action=postInscription" method="POST">
+            <form action="index.php?action=inscription" method="POST">
                 <div  class="form__line">
                     <label for="pseudo" class="form__label">Pseudo</label>
                     <input type="text" id="pseudo" name="pseudo" class="form__input">

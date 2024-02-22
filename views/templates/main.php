@@ -11,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
         rel="stylesheet">
+        <script src="https://kit.fontawesome.com/c975db2d5d.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -25,20 +26,20 @@
                 <label for="menu-toggle" class="navbar__menu-icon">&#9776;</label>
                 <ul class="navbar__list">
                     <li
-                        class="navbar__item <?= empty($_GET) || (isset($_GET['action']) && !empty($_GET['action'] == "home")) ? 'active' : "" ?>">
+                        class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "home")) ? 'active' : "" ?>">
                         <a href="index.php?action=home" class="navbar__link">Accueil</a>
                     </li>
                     <li
-                        class="navbar__item <?= empty($_GET) || (isset($_GET['action']) && !empty($_GET['action'] == "showBooks")) ? 'active' : "" ?>">
+                        class="navbar__item <?=  (isset($_GET['action']) && !empty($_GET['action'] == "showBooks")) ? 'active' : "" ?>">
                         <a href="index.php?action=showBooks" class="navbar__link">Nos livres à l'échange</a>
                     </li>
                     <li
-                        class="navbar__item <?= empty($_GET) || (isset($_GET['action']) && !empty($_GET['action'] == "messagerie")) ? 'active' : "" ?>">
+                        class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "messagerie")) ? 'active' : "" ?>">
                         <a href="index.php?action=messagerie" class="navbar__link">Messagerie</a>
                     </li>
                     <?php if (isset($_SESSION["user"])) { ?>
                         <li
-                            class="navbar__item <?= empty($_GET) || (isset($_GET['action']) && !empty($_GET['action'] == "profil")) ? 'active' : "" ?>">
+                            class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "profil")) ? 'active' : "" ?>">
                             <a href="index.php?action=profil" class="navbar__link">Mon compte</a>
                         </li>
                         <li>
@@ -46,7 +47,7 @@
                         </li>
                     <?php } else { ?>
                         <li
-                            class="navbar__item <?= empty($_GET) || (isset($_GET['action']) && ($_GET['action'] == "connexion" || $_GET['action'] == "inscription")) ? 'active' : "" ?>">
+                            class="navbar__item <?= (isset($_GET['action']) && ($_GET['action'] == "connexion" || $_GET['action'] == "inscription")) ? 'active' : "" ?>">
                             <a href="index.php?action=connexion" class="navbar__link">Connexion</a>
                         </li>
                     <?php } ?>
