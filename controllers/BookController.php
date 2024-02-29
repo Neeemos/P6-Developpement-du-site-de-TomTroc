@@ -37,6 +37,9 @@ class BookController
     {
         $bookManager = new BookManager();
         $book = $bookManager->getBookById($id);
+        if (!$book) {
+            throw new Exception("le livre demandé n'existe pas.");
+        }
         $view = new View('book');
         $view->render('book', ['book' => $book]);
     }

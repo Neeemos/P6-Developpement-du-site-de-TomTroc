@@ -46,6 +46,12 @@ header {
   list-style: none;
   padding: 0;
   margin: 0;
+  position: absolute;
+  top: 100%; /* Position the menu below the navbar */
+  left: 0;
+  background-color: var(--gris-clair);
+  width: 100%; /* Occupy full width of the screen */
+  transition: max-height 0.5s ease; /* Add smooth transition for opening/closing */
 }
 
 .navbar__item {
@@ -99,7 +105,7 @@ header {
   margin: 15px 15px 0 0;
 }
 .content__button {
-  width: 80%!important;
+  width: 80% !important;
   text-align: center;
 }
 /* FOOTER */
@@ -287,7 +293,6 @@ footer {
   border: 1px solid var(--vert-principal);
   transition: 0.3s;
   cursor: pointer;
-  font-family: "InterSB";
   font-size: 1rem;
   text-decoration: none;
   display: block;
@@ -308,8 +313,8 @@ footer {
   color: var(--vert-principal);
 }
 .button-border-green:hover {
-  color: #006d41;
-  border-color: #006d41;
+  color: #ffffff;
+  background-color: #006d41;
 }
 
 .cardbook__link {
@@ -497,21 +502,17 @@ footer {
 }
 
 .navbar__menu-toggle:checked ~ .navbar__list {
-  display: block; /
+  display: block;
 }
-.navbar__menu-toggle:checked ~ .navbar__menu-icon {
-  display: none!important;
-}
+
 .input-container {
   position: relative;
 }
 
-
-
 .fa-magnifying-glass {
   position: absolute;
   left: 10px; /* Adjust to position the icon */
-  top: 50%;
+  top: 30%;
   transform: translateY(-50%);
   color: var(--gris-texte);
 }
@@ -526,7 +527,8 @@ footer {
   }
   .navbar__list {
     flex-direction: row; /* Revert */
-    display: flex!important; /* Show nav links */
+    display: flex !important; /* Show nav links */
+    position: initial;
   }
 
   .navbar__menu-icon {
@@ -546,7 +548,7 @@ footer {
     flex-direction: row;
     padding-top: 80px;
   }
-  
+
   .home__content {
     max-width: 15% !important;
     order: 0;
@@ -577,9 +579,9 @@ footer {
     max-width: 55%; /* Revert */
     flex-direction: row; /* Revert */
     margin: auto; /* Revert */
-    margin-bottom: 65px; /* Revert */    
+    margin-bottom: 65px; /* Revert */
   }
- 
+
   .showBooks__cards {
     max-width: 55%; /* Revert */
   }
@@ -605,11 +607,218 @@ footer {
     width: 40%;
   }
   .login__img {
-    max-width: 5  0%;
+    max-width: 5 0%;
   }
 }
 
 .navbar__menu-toggle {
   display: none; /* Revert */
+}
+
+/* content-edit-profil edit-profil */
+/* profil */
+.profile {
+  background-color: #faf9f7;
+  padding-bottom: 102px;
+}
+
+.profile__card {
+  max-width: 1135px;
+  margin: auto;
+}
+
+.profile__title {
+  padding-top: 90px;
+  padding-bottom: 48px;
+  margin: 0;
+}
+
+.profile__data {
+  display: flex;
+  justify-content: space-between;
+  gap: 33px;
+}
+
+.avatar {
+  background-color: white;
+  border-radius: 20px;
+  width: 50%;
+}
+
+.avatar__img {
+  width: 135px;
+  height: 135px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.profile__avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 48px;
+  padding-bottom: 93px;
+}
+
+.avatar__input {
+  display: none;
+}
+
+.avatar__label {
+  cursor: pointer;
+  margin-top: 5px;
+  text-decoration: underline;
+}
+
+.avatar__line {
+  width: 50%;
+  height: 1px;
+  background-color: var(--gris-clair);
+  margin: 48px 0;
+}
+
+.avatar__title {
+  margin: 0;
+  margin-bottom: 11px;
+  font-size: 24px;
+}
+
+.avatar__date {
+  margin-bottom: 21px;
+  font-size: 14px;
+  color: var(--gris-texte);
+}
+
+.avatar__subtitle {
+  margin: 0;
+  margin-bottom: 6px;
+  font-size: 8px;
+}
+
+.avatar__count {
+  font-size: 14px;
+}
+
+.profile__information {
+  padding: 50px 50px;
+}
+
+.personalInfo__title {
+  margin: 0;
+  margin-bottom: 26px;
+  font-size: 16px;
+  font-weight: 400;
+}
+.avatar__label {
+  display: block;
+  font-size: 14px;
+  color: var(--gris-texte);
+  margin-bottom: 10px;
+}
+
+input,
+select {
+  box-sizing: border-box;
+  width: 100%;
+  height: 48px;
+  border-radius: 6px;
+  background-color: #edf2f6;
+  border: 1px solid #f0f0f0;
+  margin-bottom: 32px;
+  padding: 0 14px;
+  font-size: 14px;
+  color: var(--gris-fonce);
+}
+
+.profile__books {
+  max-width: 100%;
+  background-color: white;
+  margin-top: 2rem;
+  border-radius: 20px;
+}
+
+.profileBooks__table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.profileBooks__head {
+  border-bottom: 1px solid grey;
+  padding: 8px;
+  text-align: left;
+}
+.profile__books thead th {
+  text-align: left;
+  font-size: 0.5rem;
+  padding: 20px 60px 20px 60px;
+}
+.profile__books thead th:first-child {
+  padding-left: 66px;
+}
+
+.profileBooks__table tr:last-child td:first-child {
+  border-bottom-left-radius: 20px;
+}
+
+.profileBooks__table tr:last-child td:last-child {
+  border-bottom-right-radius: 20px;
+}
+
+.profile__books tbody td {
+  border: none;
+  font-size: 12px;
+}
+
+.profile__books tbody td:first-child {
+  padding-bottom: 26px;
+  padding-top: 26px;
+  padding-left: 66px;
+}
+
+.profile__books tbody tr:nth-child(even) {
+  background-color: #edf2f6;
+}
+
+.profile__books tbody img {
+  width: 78px;
+  height: 78px;
+  object-fit: cover;
+}
+
+.profile__books tbody .description {
+  display: -webkit-box;
+  -webkit-box-align: center;
+  max-width: 128px;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+  font-style: italic;
+}
+
+.profile__books tbody .edit-delete a:first-child {
+  margin-right: 28px;
+  color: black;
+}
+.profile__books tbody .edit-delete a:last-child {
+  color: red;
+}
+
+.profile__books tbody .indisponible {
+  background-color: #c46d6d;
+  color: white;
+  padding: 3.7px 13.31px;
+  width: fit-content;
+  border-radius: 29.58px;
+}
+.profile__books tbody .disponible {
+  background-color: #6dc4a1;
+  color: white;
+  padding: 3.7px 13.31px;
+  width: fit-content;
+  border-radius: 29.58px;
+}
+
+.background-page-edit-book {
+  background-color: #faf9f7;
+  padding-bottom: 92px;
 }
 

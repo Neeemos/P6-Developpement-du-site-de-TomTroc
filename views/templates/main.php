@@ -39,8 +39,8 @@
                     </li>
                     <?php if (isset($_SESSION["user"])) { ?>
                         <li
-                            class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "profil")) ? 'active' : "" ?>">
-                            <a href="index.php?action=profil" class="navbar__link">Mon compte</a>
+                            class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "profile")) ? 'active' : "" ?>">
+                            <a href="index.php?action=profile" class="navbar__link">Mon compte</a>
                         </li>
                         <li>
                             <a href='index.php?action=logout' class="navbar__link">Déconnexion</a>
