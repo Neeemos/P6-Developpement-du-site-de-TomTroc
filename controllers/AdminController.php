@@ -3,7 +3,7 @@
 class AdminController
 {
 
-    public function connexion(): void
+    public function login(): void
     {
 
         $email = Utils::request("email");
@@ -12,10 +12,10 @@ class AdminController
         if (isset($password) && isset($email)) {
             $this->connectUser();
         }
-        $view = new View("Connexion");
-        $view->render("connexion");
+        $view = new View("login");
+        $view->render("login");
     }
-    public function inscription(): void
+    public function register(): void
     {
         $pseudo = Utils::request("pseudo");
         $password = Utils::request("password");
@@ -25,8 +25,8 @@ class AdminController
             $this->createUser();
         }
 
-        $view = new View("Inscription");
-        $view->render("inscription");
+        $view = new View("register");
+        $view->render("register");
     }
     /**
      * Vérifie que l'utilisateur est connecté.
@@ -36,7 +36,7 @@ class AdminController
     {
         // On vérifie que l'utilisateur est connecté.
         if (!isset($_SESSION['user'])) {
-            Utils::redirect("connexion");
+            Utils::redirect("login");
         }
     }
     /**
@@ -96,7 +96,7 @@ class AdminController
             throw new Exception("Utilisateur déja existant");
         }
 
-        Utils::redirect("connexion");
+        Utils::redirect("login");
     }
 
     /**

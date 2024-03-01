@@ -140,7 +140,7 @@ footer {
 
 .lastbook__card {
   display: flex;
-  gap: 30px;
+  gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -316,19 +316,20 @@ footer {
   color: #ffffff;
   background-color: #006d41;
 }
-
+.cardbook__card {
+  width: 45%;
+}
 .cardbook__link {
   box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.01);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   text-decoration: none;
   display: block;
-  width: 40%;
   margin-bottom: 5%;
 }
 
 .cardbook__image {
-  height: 200px;
+  height: 160px;
   width: 100%;
   object-fit: cover;
   display: block;
@@ -336,17 +337,25 @@ footer {
 .cardbook__information {
   background-color: #ffffff;
   border-radius: 0 0 10px 10px;
-  padding: 15px;
+  padding: 10px 0px 1px 10px;
+  line-height: 15px;
 }
 .cardbook__title {
   color: var(--gris-fonce);
+  margin: 0;
+  font-size: 0.7rem;
 }
 .cardbook__author {
   color: var(--gris-texte);
+  margin: 0;
+  font-size: 0.65rem;
 }
 .cardbook__seller {
   font-style: italic;
   color: var(--gris-texte);
+  padding: 0;
+  font-size: 0.6rem;
+  line-height: 13px;
 }
 .cardbook__button {
   margin: 0 auto;
@@ -407,6 +416,7 @@ footer {
   font-size: 10px;
   margin-bottom: 1rem;
   margin-left: 17.2%;
+  display: none;
 }
 .showBook__link {
   color: var(--gris-texte);
@@ -416,17 +426,17 @@ footer {
 
 .book {
   display: flex;
-  margin-left: 10%;
+  flex-direction: column;
 }
 
 .book__image {
-  width: 60%;
+  width: 100%;
   max-height: 850px;
   object-fit: cover;
 }
 
 .book__content {
-  width: 40%;
+  width: 100%;
   padding: 50px 50px 50px 50px;
   background-color: #faf9f7;
 }
@@ -512,7 +522,7 @@ footer {
 .fa-magnifying-glass {
   position: absolute;
   left: 10px; /* Adjust to position the icon */
-  top: 30%;
+  top: 50%;
   transform: translateY(-50%);
   color: var(--gris-texte);
 }
@@ -562,17 +572,14 @@ footer {
   .lastbook__card {
     gap: 75px; /* Revert */
   }
+  .cardbook__card {
+    max-width: 200px;
+  }
   .cardbook__link {
     width: 200px; /* Revert */
   }
   .cardbook__button {
     display: block; /* Revert */
-  }
-  .cardbook__image {
-    width: 115%; /* Revert */
-  }
-  .cardbook__information {
-    width: 100%; /* Revert */
   }
   .showBooks__search {
     align-items: center; /* Revert */
@@ -607,7 +614,19 @@ footer {
     width: 40%;
   }
   .login__img {
-    max-width: 5 0%;
+    max-width: 50%;
+  }
+  .book {
+    flex-direction: row;
+  }
+  .showBook__header {
+    display: inline;
+  }
+  .book__image {
+  width: 60%;
+  }
+  .book__content {
+    width: 40%;
   }
 }
 
@@ -619,30 +638,31 @@ footer {
 /* profil */
 .profile {
   background-color: #faf9f7;
-  padding-bottom: 102px;
+  padding-bottom: 92px; /* Adjusted padding for mobile */
 }
 
 .profile__card {
-  max-width: 1135px;
-  margin: auto;
+  max-width: 95%; /* Adjusted to fit mobile screen */
 }
 
 .profile__title {
-  padding-top: 90px;
-  padding-bottom: 48px;
+  padding-top: 48px; /* Adjusted padding for mobile */
+  padding-bottom: 32px; /* Adjusted padding for mobile */
   margin: 0;
 }
 
 .profile__data {
   display: flex;
-  justify-content: space-between;
-  gap: 33px;
+  flex-direction: column; /* Adjusted for mobile */
+  gap: 20px; /* Adjusted for mobile */
 }
 
 .avatar {
   background-color: white;
   border-radius: 20px;
-  width: 50%;
+  width: 95%; /* Adjusted width for mobile */
+  margin: auto; /* Centered for mobile */
+  padding: 20px; /* Adjusted padding for mobile */
 }
 
 .avatar__img {
@@ -651,12 +671,13 @@ footer {
   object-fit: cover;
   border-radius: 50%;
 }
+
 .profile__avatar {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 48px;
-  padding-bottom: 93px;
+  padding-bottom: 32px;
 }
 
 .avatar__input {
@@ -670,10 +691,10 @@ footer {
 }
 
 .avatar__line {
-  width: 50%;
+  width: 90%; /* Adjusted width for mobile */
   height: 1px;
   background-color: var(--gris-clair);
-  margin: 48px 0;
+  margin: 32px auto; /* Centered for mobile */
 }
 
 .avatar__title {
@@ -698,16 +719,13 @@ footer {
   font-size: 14px;
 }
 
-.profile__information {
-  padding: 50px 50px;
-}
-
 .personalInfo__title {
   margin: 0;
   margin-bottom: 26px;
   font-size: 16px;
   font-weight: 400;
 }
+
 .avatar__label {
   display: block;
   font-size: 14px;
@@ -715,15 +733,14 @@ footer {
   margin-bottom: 10px;
 }
 
-input,
-select {
+.personalInfo__input {
   box-sizing: border-box;
   width: 100%;
   height: 48px;
   border-radius: 6px;
   background-color: #edf2f6;
   border: 1px solid #f0f0f0;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   padding: 0 14px;
   font-size: 14px;
   color: var(--gris-fonce);
@@ -740,18 +757,22 @@ select {
   border-collapse: collapse;
   width: 100%;
 }
+
 .profileBooks__head {
   border-bottom: 1px solid grey;
   padding: 8px;
   text-align: left;
+  display: none;
 }
+
 .profile__books thead th {
   text-align: left;
   font-size: 0.5rem;
-  padding: 20px 60px 20px 60px;
+  padding: 20px 20px; /* Adjusted padding for mobile */
 }
+
 .profile__books thead th:first-child {
-  padding-left: 66px;
+  padding-left: 20px; /* Adjusted padding for mobile */
 }
 
 .profileBooks__table tr:last-child td:first-child {
@@ -768,9 +789,9 @@ select {
 }
 
 .profile__books tbody td:first-child {
-  padding-bottom: 26px;
-  padding-top: 26px;
-  padding-left: 66px;
+  padding-bottom: 20px; /* Adjusted padding for mobile */
+  padding-top: 20px; /* Adjusted padding for mobile */
+  padding-left: 20px; /* Adjusted padding for mobile */
 }
 
 .profile__books tbody tr:nth-child(even) {
@@ -795,9 +816,10 @@ select {
 }
 
 .profile__books tbody .edit-delete a:first-child {
-  margin-right: 28px;
+  margin-right: 20px; /* Adjusted margin for mobile */
   color: black;
 }
+
 .profile__books tbody .edit-delete a:last-child {
   color: red;
 }
@@ -809,6 +831,7 @@ select {
   width: fit-content;
   border-radius: 29.58px;
 }
+
 .profile__books tbody .disponible {
   background-color: #6dc4a1;
   color: white;
@@ -822,3 +845,38 @@ select {
   padding-bottom: 92px;
 }
 
+/* Media Query for larger screens */
+@media screen and (min-width: 801px) {
+  .avatar {
+    width: 50%; /* Reverted width for larger screens */
+    margin: 0 0 29px 0;
+  }
+  .profile__information {
+    padding: 50px;
+  }
+
+  .profile__data {
+    flex-direction: row; /* Reverted flex direction for larger screens */
+  }
+
+  .personalInfo__button {
+    width: auto; /* Reset width for larger screens */
+  }
+
+  .profileBooks__head {
+    display: table-header-group; /* Reverted display for larger screens */
+  }
+
+  .profile__avatar {
+    padding-bottom: 93px; /* Reverted padding for larger screens */
+  }
+
+  .profile__books {
+    display: block; /* Reverted display for larger screens */
+    margin: auto; /* Centered for larger screens */
+    flex-direction: row; /* Reverted flex direction for larger screens */
+  }
+  .profile__card {
+    margin: 0 150px;
+  }
+}

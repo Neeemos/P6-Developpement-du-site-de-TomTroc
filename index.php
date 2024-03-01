@@ -16,13 +16,13 @@ try {
             $BookController = new BookController();
             $BookController->showHome();
             break;
-        case 'connexion':
+        case 'login':
             $adminController = new AdminController();
-            $adminController->connexion();
+            $adminController->login();
             break;
-        case 'inscription':
+        case 'register':
             $adminController = new AdminController();
-            $adminController->inscription();
+            $adminController->register();
             break;
         case 'showBooks':
             $bookController = new BookController();

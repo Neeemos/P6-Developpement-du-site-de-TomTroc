@@ -1,5 +1,6 @@
 <?php
 foreach ($books as $book) { ?>
+<div class="cardbook__card">
     <a href='index.php?action=book&id=<?= $book->getId() ?>' class='cardbook__link'>
         <img src='images/<?= $book->getimage() ?>' class="cardbook__image" alt='image du livre <?= $book->getTitle() ?> '>
         <div class='cardbook__information'>
@@ -14,5 +15,6 @@ foreach ($books as $book) { ?>
             </p>
         </div>
     </a>
+    </div>
 <?php }
 ?>

@@ -47,8 +47,8 @@
                         </li>
                     <?php } else { ?>
                         <li
-                            class="navbar__item <?= (isset($_GET['action']) && ($_GET['action'] == "connexion" || $_GET['action'] == "inscription")) ? 'active' : "" ?>">
-                            <a href="index.php?action=connexion" class="navbar__link">Connexion</a>
+                            class="navbar__item <?= (isset($_GET['action']) && ($_GET['action'] == "login" || $_GET['action'] == "register")) ? 'active' : "" ?>">
+                            <a href="index.php?action=login" class="navbar__link">Connexion</a>
                         </li>
                     <?php } ?>
                 </ul>
