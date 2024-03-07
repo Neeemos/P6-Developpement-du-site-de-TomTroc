@@ -13,4 +13,3 @@
         <?php include('views/templates/bookloop.php'); ?>
     </div>
 </section>
-</form>

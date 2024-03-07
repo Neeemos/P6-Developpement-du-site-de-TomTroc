@@ -11,7 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&display=swap&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
         rel="stylesheet">
-        <script src="https://kit.fontawesome.com/c975db2d5d.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c975db2d5d.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
                         <a href="index.php?action=home" class="navbar__link">Accueil</a>
                     </li>
                     <li
-                        class="navbar__item <?=  (isset($_GET['action']) && !empty($_GET['action'] == "showBooks")) ? 'active' : "" ?>">
+                        class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "showBooks")) ? 'active' : "" ?>">
                         <a href="index.php?action=showBooks" class="navbar__link">Nos livres à l'échange</a>
                     </li>
                     <li
@@ -69,7 +69,7 @@
             <img src="images/logo-footer.svg" alt="Logo Tom troc footer" class="footer__img">
         </a>
     </footer>
-
+    <?= (isset($_GET['action']) && !empty($_GET['action'] == "showBooks")) ? '<script src="views/js/filterbooks.js"></script>' : "" ?>
 </body>
 
 </html>
