@@ -11,7 +11,7 @@ class UserController
         }
      
         // Unserialize the user object
-        $user = unserialize($_SESSION["user"]);
+        $user = $_SESSION["user"];
 
         // Fetch user's books
         $bookManager = new BookManager();

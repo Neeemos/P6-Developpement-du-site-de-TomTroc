@@ -1,11 +1,7 @@
-<?php
-?>
 <section class="profile">
     <div class="profile__card">
-
         <h1 class="profile__title">Mon compte</h1>
         <div class="profile__data">
-
             <div class="profile__avatar avatar">
                 <img class="avatar__img" src="images/darwin-vegher.jpg" alt="photo de profile">
                 <input class="avatar__input" type="file" id="avatar" value="modifier" name="avatar"
