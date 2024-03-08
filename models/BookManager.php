@@ -12,10 +12,10 @@ class BookManager extends AbstractEntityManager
      */
     public function getLastedBooks(?int $limit = null): array
     {
-        $sql = "SELECT livres.*, users.pseudo 
-    FROM livres 
-    INNER JOIN users ON livres.user_id = users.id 
-    ORDER BY livres.id DESC";
+        $sql = "SELECT books.*, users.pseudo 
+    FROM books 
+    INNER JOIN users ON books.user_id = users.id 
+    ORDER BY books.id DESC";
 
         if ($limit !== null && is_int($limit) && $limit > 0) {
             $sql .= " LIMIT $limit";
@@ -37,12 +37,12 @@ class BookManager extends AbstractEntityManager
      */
     public function getBookById(?int $id = null, ?int $userId = null)
     {
-        $sql = "SELECT livres.*, users.pseudo, users.image AS userImage
-            FROM livres 
-            INNER JOIN users ON livres.user_id = users.id";
+        $sql = "SELECT books.*, users.pseudo, users.image AS userImage
+            FROM books 
+            INNER JOIN users ON books.user_id = users.id";
 
         if ($id !== null) {
-            $sql .= " WHERE livres.id = :id";
+            $sql .= " WHERE books.id = :id";
             $params = ["id" => $id];
             
             $stmt = $this->db->query($sql, $params);
@@ -57,7 +57,7 @@ class BookManager extends AbstractEntityManager
 
             return $book;
         } elseif ($userId !== null) {
-            $sql .= " WHERE livres.user_id = :userId ORDER BY livres.id DESC";
+            $sql .= " WHERE books.user_id = :userId ORDER BY books.id DESC";
             $params = ["userId" => $userId];
           
             $stmt = $this->db->query($sql, $params);
