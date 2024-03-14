@@ -34,7 +34,7 @@
         <div class="profile__books profileBooks">
             <table class="profileBooks__table">
                 <thead class="profileBooks__head">
-                    <tr>
+                    <tr class="head__tab">
                         <th>PHOTO</th>
                         <th>TITRE</th>
                         <th>AUTEUR</th>
@@ -43,27 +43,28 @@
                         <th>ACTION</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="tbody">
                     <?php
 
                     if (isset($books)) {
                         foreach ($books as $book) {
                             ?>
-                            <tr>
-                                <td><img src="images/<?php echo $book->getimage(); ?>"
-                                        alt="Image du livre <?php echo $book->getTitle(); ?>"></td>
+                            <tr class="tablook">
+                                <td class="image">
+                                    <img src="images/<?php echo $book->getimage(); ?>" alt="Image du livre <?php echo $book->getTitle(); ?>">
+                                </td>
                                 <td class="title">
                                     <?php echo $book->getTitle(); ?>
                                 </td>
                                 <td class="author">
                                     <?php echo $book->getAuthor(); ?>
                                 </td>
-                                <td>
+                                <td class="description">
                                     <p class="description">
                                         <?php echo $book->getDescription(); ?>
                                     </p>
                                 </td>
-                                <td>
+                                <td class="disponnibilite">
                                     <?php if ($book->getAvailable()): ?>
                                         <div class="disponible">Disponible</div>
                                     <?php else: ?>

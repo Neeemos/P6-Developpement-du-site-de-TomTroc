@@ -30,7 +30,7 @@ header {
   color: var(--gris-fonce);
   text-decoration: none;
   margin: 0 1rem;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .navbar__link:hover {
@@ -55,7 +55,7 @@ header {
 }
 
 .navbar__item {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .active {
@@ -747,76 +747,91 @@ footer {
   font-size: 14px;
   color: var(--gris-fonce);
 }
-
-.profile__books {
-  max-width: 100%;
-  background-color: white;
-  margin-top: 2rem;
-  border-radius: 20px;
-}
-
-.profileBooks__table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.profileBooks__head {
-  border-bottom: 1px solid grey;
-  padding: 8px;
-  text-align: left;
-  display: none;
-}
-
-.profile__books thead th {
-  text-align: left;
-  font-size: 0.5rem;
-  padding: 20px 20px; /* Adjusted padding for mobile */
-}
-
-.profile__books thead th:first-child {
-  padding-left: 20px; /* Adjusted padding for mobile */
-}
-
-.profileBooks__table tr:last-child td:first-child {
-  border-bottom-left-radius: 20px;
-}
-
-.profileBooks__table tr:last-child td:last-child {
-  border-bottom-right-radius: 20px;
-}
-
-.profile__books tbody td {
-  border: none;
-  font-size: 12px;
-}
-
-.profile__books tbody td:first-child {
-  padding-bottom: 20px; /* Adjusted padding for mobile */
-  padding-top: 20px; /* Adjusted padding for mobile */
-  padding-left: 20px; /* Adjusted padding for mobile */
-}
-
-.profile__books tbody tr:nth-child(even) {
-  background-color: #edf2f6;
-}
-
 .profile__books tbody img {
   width: 78px;
   height: 78px;
   object-fit: cover;
 }
 
-.profile__books tbody .description {
-  display: -webkit-box;
-  -webkit-box-align: center;
-  max-width: 128px;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin: 0;
-  font-style: italic;
+.profile__books {
+  width: 100%;
+  display: block;
 }
 
+.profileBooks__table {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileBooks__head {
+  display: none;
+}
+
+.image {
+  order: 1;
+}
+
+.title {
+  order: 2;
+  width: 40%;
+  height: 1rem;
+  height: fit-content;
+}
+
+.author {
+  order: 3;
+  width: 40%;
+  margin-left: 100px;
+  height: 1rem;
+}
+
+.disponnibilite {
+  order: 4;
+  margin-left: 100px;
+  height: 1rem;
+  width: 65%;
+  margin-top: 2%;
+}
+
+.description {
+  order: 5;
+  height: 4.6rem;
+  width: 100%;
+  margin: 1rem 0px;
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis;
+}
+
+.edit-delete {
+  order: 6;
+}
+
+td {
+  vertical-align: top;
+  display: inline;
+}
+
+.image {
+  height: 0rem;
+  margin-right: 20px;
+}
+
+.tablook {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10%;
+  background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  margin-top: 10px;
+}
+
+.tbody {
+  width: 90%;
+  margin: 2% auto;
+  gap: 20px;
+  flex-direction: column;
+}
 .profile__books tbody .edit-delete a:first-child {
   margin-right: 20px; /* Adjusted margin for mobile */
   color: black;
@@ -825,7 +840,6 @@ footer {
 .profile__books tbody .edit-delete a:last-child {
   color: red;
 }
-
 .profile__books tbody .indisponible {
   background-color: #c46d6d;
   color: white;
@@ -841,14 +855,7 @@ footer {
   width: fit-content;
   border-radius: 29.58px;
 }
-
-.background-page-edit-book {
-  background-color: #faf9f7;
-  padding-bottom: 92px;
-}
-
-/* Media Query for larger screens */
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 1200px) {
   .avatar {
     width: 50%; /* Reverted width for larger screens */
     margin: 0 0 29px 0;
@@ -865,10 +872,6 @@ footer {
     width: auto; /* Reset width for larger screens */
   }
 
-  .profileBooks__head {
-    display: table-header-group; /* Reverted display for larger screens */
-  }
-
   .profile__avatar {
     padding-bottom: 93px; /* Reverted padding for larger screens */
   }
@@ -881,4 +884,96 @@ footer {
   .profile__card {
     margin: 0 150px;
   }
+
+  .profileBooks__head {
+    border-bottom: 1px solid grey;
+    padding: 8px;
+    text-align: left;
+    display: block;
+  }
+  .tablook {
+    padding: 0;
+    flex-wrap: nowrap;
+  }
+
+  .profile__books thead th {
+    text-align: left;
+    font-size: 0.5rem;
+    padding: 20px 20px; /* Adjusted padding for mobile */
+  }
+
+  .profile__books thead th:first-child {
+    padding-left: 20px; /* Adjusted padding for mobile */
+  }
+
+  .profileBooks__table tr:last-child td:first-child {
+    border-bottom-left-radius: 20px;
+  }
+
+  .profileBooks__table tr:last-child td:last-child {
+    border-bottom-right-radius: 20px;
+  }
+
+  .profile__books tbody td {
+    border: none;
+    font-size: 12px;
+  }
+
+  .profile__books tbody tr:nth-child(even) {
+    background-color: #edf2f6;
+  }
+
+  .profile__books tbody img {
+    width: 78px;
+    height: 78px;
+    object-fit: cover;
+  }
+
+  .edit-delete {
+    display: flex;
+  }
+  .tbody {
+    margin: 0;
+    width: 100%;
+  }
+  .image {
+    height: 100%;
+    margin: 0;
+  }
+  .title {
+    margin: 2% 0 0;
+    width: unset;
+
+  }
+  .author {
+    margin: 2% 0 0;
+    width: unset;
+  }
+  .description {
+    margin: 2% 0 0;
+    width: unset;
+  }
+  .edit-delete {
+    margin: 2% 0 0;
+    width: unset;
+  }
+  .disponnibilite {
+    width: unset;
+        margin: 2% 0 0;
+  }
+  td {
+    width: 15%!important;
+  }
+  th {
+    width: 12.2% !important;
+  }
+  .tablook {
+    margin: 0;
+    padding: 2%;
+    border-radius: 0;
+  }
+.head__tab {
+  display: flex;
+}
+  
 }
