@@ -50,28 +50,28 @@
                         foreach ($books as $book) {
                             ?>
                             <tr class="tablook">
-                                <td class="image">
+                                <td class="tablook__image">
                                     <img src="images/<?php echo $book->getimage(); ?>" alt="Image du livre <?php echo $book->getTitle(); ?>">
                                 </td>
-                                <td class="title">
+                                <td class="tablook__title">
                                     <?php echo $book->getTitle(); ?>
                                 </td>
-                                <td class="author">
+                                <td class="tablook__author">
                                     <?php echo $book->getAuthor(); ?>
                                 </td>
-                                <td class="description">
-                                    <p class="description">
+                                <td class="tablook__description">
+                                    <p class="tablook__description">
                                         <?php echo $book->getDescription(); ?>
                                     </p>
                                 </td>
-                                <td class="disponnibilite">
-                                    <?php if ($book->getAvailable()): ?>
+                                <td class="tablook__disponibilite">
+                                    <?php if ($book->getAvailable()): ?>s
                                         <div class="disponible">Disponible</div>
                                     <?php else: ?>
                                         <div class="indisponible">Non disponible</div>
                                     <?php endif; ?>
                                 </td>
-                                <td class="edit-delete">
+                                <td class="tablook__edit-delete">
                                     <a href="index.php?action=editBook&id=<?php echo $book->getId(); ?>" class="edit">Éditer</a>
                                     <a href="#" class="delete">Supprimer</a>
                                 </td>

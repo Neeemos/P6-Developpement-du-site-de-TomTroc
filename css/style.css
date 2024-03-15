@@ -644,7 +644,8 @@ footer {
 }
 
 .profile__card {
-  max-width: 95%; /* Adjusted to fit mobile screen */
+  max-width: 100%; 
+  margin: 0 3%;
 }
 
 .profile__title {
@@ -767,25 +768,21 @@ footer {
   display: none;
 }
 
-.image {
-  order: 1;
-}
-
-.title {
+.tablook__title {
   order: 2;
   width: 40%;
   height: 1rem;
   height: fit-content;
 }
 
-.author {
+.tablook__author {
   order: 3;
   width: 40%;
   margin-left: 100px;
   height: 1rem;
 }
 
-.disponnibilite {
+.tablook__disponibilite {
   order: 4;
   margin-left: 100px;
   height: 1rem;
@@ -793,7 +790,7 @@ footer {
   margin-top: 2%;
 }
 
-.description {
+.tablook__description {
   order: 5;
   height: 4.6rem;
   width: 100%;
@@ -803,7 +800,7 @@ footer {
   text-overflow: ellipsis;
 }
 
-.edit-delete {
+.tablook__edit-delete {
   order: 6;
 }
 
@@ -812,9 +809,10 @@ td {
   display: inline;
 }
 
-.image {
+.tablook__image {
   height: 0rem;
   margin-right: 20px;
+  order: 1;
 }
 
 .tablook {
@@ -827,17 +825,15 @@ td {
 }
 
 .tbody {
-  width: 90%;
-  margin: 2% auto;
   gap: 20px;
   flex-direction: column;
 }
-.profile__books tbody .edit-delete a:first-child {
+.profile__books tbody .tablook__edit-delete a:first-child {
   margin-right: 20px; /* Adjusted margin for mobile */
   color: black;
 }
 
-.profile__books tbody .edit-delete a:last-child {
+.profile__books tbody .tablook__edit-delete a:last-child {
   color: red;
 }
 .profile__books tbody .indisponible {
@@ -929,40 +925,40 @@ td {
     object-fit: cover;
   }
 
-  .edit-delete {
+  .tablook__edit-delete {
     display: flex;
   }
   .tbody {
     margin: 0;
     width: 100%;
   }
-  .image {
+  .tablook__image {
     height: 100%;
     margin: 0;
   }
-  .title {
+  .tablook__title {
     margin: 2% 0 0;
     width: unset;
+  }
+  .tablook__author {
+    margin: 2% 0 0;
+    width: unset;
+  }
+  .tablook__description {
+    margin: 2% 0 0;
+    width: unset;
+  }
+  .tablook__edit-delete {
+    margin: 2% 0 0;
+    width: unset;
+  }
+  .tablook__disponibilite {
+    order: 5;
+    margin: 2% 0 0;
 
   }
-  .author {
-    margin: 2% 0 0;
-    width: unset;
-  }
-  .description {
-    margin: 2% 0 0;
-    width: unset;
-  }
-  .edit-delete {
-    margin: 2% 0 0;
-    width: unset;
-  }
-  .disponnibilite {
-    width: unset;
-        margin: 2% 0 0;
-  }
   td {
-    width: 15%!important;
+    width: 15% !important;
   }
   th {
     width: 12.2% !important;
@@ -972,8 +968,7 @@ td {
     padding: 2%;
     border-radius: 0;
   }
-.head__tab {
-  display: flex;
-}
-  
+  .head__tab {
+    display: flex;
+  }
 }
