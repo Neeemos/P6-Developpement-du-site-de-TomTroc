@@ -663,9 +663,10 @@ footer {
 .avatar {
   background-color: white;
   border-radius: 20px;
-  width: 95%; /* Adjusted width for mobile */
-  margin: auto; /* Centered for mobile */
-  padding: 20px; /* Adjusted padding for mobile */
+  width: 100%; 
+  margin: auto;
+  padding: 20px; 
+  box-sizing: border-box;
 }
 
 .avatar__img {
