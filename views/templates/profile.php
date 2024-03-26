@@ -1,8 +1,8 @@
-<section class="profile">
+<div class="profile">
     <div class="profile__card">
         <h1 class="profile__title">Mon compte</h1>
         <div class="profile__data">
-            <div class="profile__avatar avatar">
+            <section class="profile__avatar avatar">
                 <img class="avatar__img" src="images/darwin-vegher.jpg" alt="photo de profile">
                 <input class="avatar__input" type="file" id="avatar" value="modifier" name="avatar"
                     accept="image/png, image/jpeg">
@@ -14,10 +14,10 @@
                 <p class="avatar__date">Membre depuis 1 an</p>
                 <h3 class="avatar__subtitle">BIBLIOTHEQUE</h3>
                 <div class="avatar__count">
-                    <?= isset($books) ? count($books) : 0 ?> livres
+                    <?= isset ($books) ? count($books) : 0 ?> livres
                 </div>
-            </div>
-            <div class="profile__information avatar personalInfo">
+            </section>
+            <section class="profile__information avatar personalInfo">
                 <h3 class="personalInfo__title">Vos informations personnelles</h3>
                 <form class="personalInfo__form" action="index.php?action=profil" method="POST">
                     <label class="personalInfo__label" for="email">Adresse email</label>
@@ -29,9 +29,9 @@
                         value="<?= $user->pseudo ?>" readonly>
                     <button type="submit" class="button-border-green button">Enregistrer</button>
                 </form>
-            </div>
+            </section>
         </div>
-        <div class="profile__books profileBooks">
+        <section class="profile__books profileBooks">
             <table class="profileBooks__table">
                 <thead class="profileBooks__head">
                     <tr class="head__tab">
@@ -46,12 +46,13 @@
                 <tbody class="tbody">
                     <?php
 
-                    if (isset($books)) {
+                    if (isset ($books)) {
                         foreach ($books as $book) {
                             ?>
                             <tr class="tablook">
                                 <td class="tablook__image">
-                                    <img src="images/<?php echo $book->getimage(); ?>" alt="Image du livre <?php echo $book->getTitle(); ?>">
+                                    <img src="images/<?php echo $book->getimage(); ?>"
+                                        alt="Image du livre <?php echo $book->getTitle(); ?>">
                                 </td>
                                 <td class="tablook__title">
                                     <?php echo $book->getTitle(); ?>
@@ -65,7 +66,7 @@
                                     </p>
                                 </td>
                                 <td class="tablook__disponibilite">
-                                    <?php if ($book->getAvailable()): ?>s
+                                    <?php if ($book->getAvailable()): ?>
                                         <div class="disponible">Disponible</div>
                                     <?php else: ?>
                                         <div class="indisponible">Non disponible</div>
@@ -83,6 +84,6 @@
 
                 </tbody>
             </table>
-        </div>
+        </section>
     </div>
-</section>
+</div>
