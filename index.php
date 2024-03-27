@@ -25,8 +25,14 @@ try {
             $adminController->register();
             break;
         case 'showBooks':
-            $bookController = new BookController();
-            $bookController->showBooks();
+            if (isset ($id)) {
+                $bookController = new BookController();
+                $bookController->ShowBooksByNameOrAutor($id);
+
+            } else {
+                $bookController = new BookController();
+                $bookController->showBooks();
+            }
             break;
         case 'book':
             $bookController = new BookController();
