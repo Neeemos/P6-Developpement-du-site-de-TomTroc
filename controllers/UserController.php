@@ -6,7 +6,7 @@ class UserController
     {
         // Check if user is logged in
         if (!isset($_SESSION["user"])) {
-            header("Location: index.php?action=connexion");
+            header("Location: index.php?action=login");
             exit();
         }
      

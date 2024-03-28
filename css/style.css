@@ -62,6 +62,9 @@ header {
   font-weight: bold;
 }
 
+.flipped-icon {
+ display: none!important;
+}
 .home {
   background-color: var(--gris-clair);
   display: flex;
@@ -528,15 +531,29 @@ footer {
 @media screen and (min-width: 1200px) {
   .navbar {
     justify-content: space-around; /* Revert */
+    padding: 30px;
   }
   .navbar__item {
-    margin-right: 0; /* Revert */
-    margin-bottom: 10px; /* Revert */
+    margin-right: 25px;
+    margin-bottom: 10px;
   }
   .navbar__list {
     flex-direction: row; /* Revert */
     display: flex !important; /* Show nav links */
     position: initial;
+    margin-left: 3%;
+  }
+  .navbar__content {
+    min-width: 35%;
+    height: 19px;
+  }
+  .flipped-icon {
+    transform: scaleX(-1);
+    display: inline-block!important;
+  }
+  div.navbar__content:nth-child(1) {
+    width: 50%;
+    border-right: 1px solid grey;
   }
 
   .navbar__menu-icon {
@@ -644,7 +661,7 @@ footer {
 }
 
 .profile__card {
-  max-width: 100%; 
+  max-width: 100%;
   margin: 0 3%;
 }
 
@@ -663,9 +680,9 @@ footer {
 .avatar {
   background-color: white;
   border-radius: 20px;
-  width: 100%; 
+  width: 100%;
   margin: auto;
-  padding: 20px; 
+  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -956,7 +973,6 @@ td {
   .tablook__disponibilite {
     order: 5;
     margin: 2% 0 0;
-
   }
   td {
     width: 15% !important;
