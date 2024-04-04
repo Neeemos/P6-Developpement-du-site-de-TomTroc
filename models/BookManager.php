@@ -44,14 +44,14 @@ class BookManager extends AbstractEntityManager
         if ($id !== null) {
             $sql .= " WHERE books.id = :id";
             $params = ["id" => $id];
-            
+
             $stmt = $this->db->query($sql, $params);
             $stmt->execute($params);
 
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$result) {
-                return null; 
+                return null;
             }
             $book = new Book($result);
 
@@ -59,7 +59,7 @@ class BookManager extends AbstractEntityManager
         } elseif ($userId !== null) {
             $sql .= " WHERE books.user_id = :userId ORDER BY books.id DESC";
             $params = ["userId" => $userId];
-          
+
             $stmt = $this->db->query($sql, $params);
             $stmt->execute(["userId" => $userId]);
 
@@ -69,9 +69,33 @@ class BookManager extends AbstractEntityManager
             }
 
             return $books;
-        } 
+        }
     }
+    /**
+     * Récupère le livre par son nom ou son auteur.
+     * @param string $query
+     * @return Book|null
+     */
+    public function getBookByNameOrAutor(?string $query = null)
+    {
+        $sql = "SELECT * FROM books WHERE title LIKE CONCAT('%', :id, '%') OR author LIKE CONCAT('%', :id, '%')";
+        $params = ["id" => $query];
 
+        $stmt = $this->db->query($sql, $params);
+        $stmt->execute($params);
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $bookFound = [];
+        foreach ($result as $row) {
+            $bookFound[] = $row;
+        }
+
+        $json = json_encode($bookFound);
+
+        return $json;
+    }
 
 
 }

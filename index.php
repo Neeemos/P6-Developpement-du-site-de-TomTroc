@@ -7,6 +7,7 @@ require_once 'config/config.php';
 // Si aucune action n'est demandée, on affiche la page d'accueil.
 $action = Utils::request('action', 'home');
 $id = Utils::request('id');
+$query = Utils::request('query');
 // Try catch global pour gérer les erreurs
 try {
     // Pour chaque action, on appelle le bon contrôleur et la bonne méthode.
@@ -25,8 +26,14 @@ try {
             $adminController->register();
             break;
         case 'showBooks':
-            $bookController = new BookController();
-            $bookController->showBooks();
+            if (isset ($query)) {
+                $bookController = new BookController();
+                $bookController->ShowBooksByNameOrAutor($query);
+
+            } else {
+                $bookController = new BookController();
+                $bookController->showBooks();
+            }
             break;
         case 'book':
             $bookController = new BookController();

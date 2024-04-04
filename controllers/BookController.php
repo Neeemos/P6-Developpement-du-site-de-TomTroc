@@ -43,4 +43,19 @@ class BookController
         $view = new View('book');
         $view->render('book', ['book' => $book]);
     }
+
+ /**
+     * Affiche la page d'un livre.
+     * @param string $query
+     * @return void
+     */
+    public function ShowBooksByNameOrAutor($query)
+    {
+        $bookManager = new BookManager();
+        $book = $bookManager->getBookByNameOrAutor($query);
+
+        header('Content-Type: application/json');
+        echo $book;
+
+    }
 }
