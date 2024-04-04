@@ -73,13 +73,13 @@ class BookManager extends AbstractEntityManager
     }
     /**
      * Récupère le livre par son nom ou son auteur.
-     * @param string $name
+     * @param string $query
      * @return Book|null
      */
-    public function getBookByNameOrAutor(?string $name = null)
+    public function getBookByNameOrAutor(?string $query = null)
     {
         $sql = "SELECT * FROM books WHERE title LIKE CONCAT('%', :id, '%') OR author LIKE CONCAT('%', :id, '%')";
-        $params = ["id" => $name];
+        $params = ["id" => $query];
 
         $stmt = $this->db->query($sql, $params);
         $stmt->execute($params);

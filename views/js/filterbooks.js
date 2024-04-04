@@ -6,11 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to rebuild cards with provided books data
     function rebuildCards(books) {
-        // Remove all existing cardbook__card elements
-        while (cardsContainer.firstChild) {
-            cardsContainer.removeChild(cardsContainer.firstChild);
-        }
 
+        cardsContainer.innerHTML = '';
         // Rebuild cardbook__card elements with the provided books data
         books.forEach(book => {
             const card = document.createElement('div');
@@ -29,20 +26,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
             cardsContainer.appendChild(card);
         });
+
     }
 
 
     inputField.addEventListener('input', function () {
         const searchText = inputField.value.trim().toLowerCase();
         if (searchText.length >= 2) {
-            fetch(`index.php?action=showBooks&id=${searchText}`)
+            fetch(`index.php?action=showBooks&query=${searchText}`)
                 .then(response => response.json())
                 .then(data => {
                     rebuildCards(data); // Rebuild cards with the returned data
                 })
                 .catch(error => console.error('Error fetching data:', error));
         } else {
-            fetch('index.php?action=showBooks&id=')
+            fetch('index.php?action=showBooks&query=')
                 .then(response => response.json())
                 .then(data => {
                     rebuildCards(data); // Build the cards initially

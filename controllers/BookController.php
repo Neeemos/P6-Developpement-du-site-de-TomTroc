@@ -46,13 +46,13 @@ class BookController
 
  /**
      * Affiche la page d'un livre.
-     * @param string $name
+     * @param string $query
      * @return void
      */
-    public function ShowBooksByNameOrAutor($name)
+    public function ShowBooksByNameOrAutor($query)
     {
         $bookManager = new BookManager();
-        $book = $bookManager->getBookByNameOrAutor($name);
+        $book = $bookManager->getBookByNameOrAutor($query);
 
         header('Content-Type: application/json');
         echo $book;
