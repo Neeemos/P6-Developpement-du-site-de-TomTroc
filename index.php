@@ -26,7 +26,7 @@ try {
             $adminController->register();
             break;
         case 'showBooks':
-            if (isset ($query)) {
+            if (isset($query)) {
                 $bookController = new BookController();
                 $bookController->ShowBooksByNameOrAutor($query);
 
@@ -46,6 +46,10 @@ try {
         case "profile":
             $userController = new UserController();
             $userController->showProfile();
+            break;
+        case "public":
+            $userController = new UserController();
+            $userController->showProfilePublic($id);
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");

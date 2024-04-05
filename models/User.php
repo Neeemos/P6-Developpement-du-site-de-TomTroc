@@ -1,6 +1,7 @@
 <?php
 class User extends AbstractEntity
 {
+    public int $id;
     public string $pseudo;
     public string $email;
     public string $password;
@@ -12,6 +13,14 @@ class User extends AbstractEntity
     public function getPseudo(): string
     {
         return $this->pseudo;
+    }
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+    public function getId(): int
+    {
+        return $this->id;
     }
     public function setEmail(string $email): void
     {

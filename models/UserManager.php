@@ -64,4 +64,25 @@ class UserManager extends AbstractEntityManager
         }
         return null;
     }
+
+    /**
+     * Récupère les données de la page public par l'id du compte
+     * @param int|null $id
+     * @return User|null
+     */
+    public function getUserById(?int $id = null)
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $params = ["id" => $id];
+
+        $stmt = $this->db->query($sql, $params);
+        $stmt->execute($params);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            return null;
+        }
+        return new User($result);
+    }
 }
