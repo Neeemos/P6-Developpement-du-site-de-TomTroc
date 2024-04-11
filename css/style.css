@@ -533,8 +533,32 @@ footer {
   transform: translateY(-50%);
   color: var(--gris-texte);
 }
+.editBook__background {
+background-color: white;
+padding: 20px;
+border-radius: 10px 10px 10px 10px;
+display: flex;
+flex-direction: column;
+}
+.editBook__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.editBook__image {
+  object-fit: cover;
+  width: 100%;
+  max-height: 400px;
+}
+.editBook__link {
+  justify-content: flex-end;
+  display: flex;
+}
 
 @media screen and (min-width: 1200px) {
+  .editBook__card {
+    width: 45%;
+  }
   .navbar { 
     padding: 30px 30px 30px 0;
     margin: 0 150px;

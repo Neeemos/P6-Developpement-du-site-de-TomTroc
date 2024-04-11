@@ -44,8 +44,7 @@ class BookController
         $view->render('book', ['book' => $book]);
     }
 
- /**
-     * Affiche la page d'un livre.
+    /**
      * @param string $query
      * @return void
      */
@@ -57,5 +56,21 @@ class BookController
         header('Content-Type: application/json');
         echo $book;
 
+    }
+
+    /**
+     * Affiche la page d'edition d'un livre.
+     * @param int $id
+     * @return void
+     */
+    public function showEditBook($id): void
+    {
+        $bookManager = new BookManager();
+        $book = $bookManager->getBookById($id);
+        if (!$book) {
+            throw new Exception("Le livre demandé n'existe pas.");
+        }
+        $view = new View('ShowEditBook');
+        $view->render('editBook', ['book' => $book]);
     }
 }
