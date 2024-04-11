@@ -15,7 +15,7 @@
 <section class="lastbook">
     <h2 class="lastbook__title">Les derniers livres ajoutés</h2>
     <div class="lastbook__card cardbook">
-        <?php include("views/templates/bookloop.php"); ?>
+        <?php include("views/templates/includes/bookloop.php"); ?>
     </div>
     <a href="index.php?action=showBooks" class="button button-green cardbook__button">Voir tous les livres</a>
 </section>

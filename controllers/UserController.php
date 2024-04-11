@@ -15,7 +15,7 @@ class UserController
 
         // Fetch user's books
         $bookManager = new BookManager();
-        $books = $bookManager->getBookById(null, $user->getId());
+        $books = $bookManager->getBooksByUserId((int) $user->getId());
         // Render view
         $view = new View('ShowProfile');
         $view->render('profile', ['user' => $user, 'books' => $books]);
@@ -23,7 +23,7 @@ class UserController
     public function showProfilePublic($id): void
     {
         $bookManager = new BookManager();
-        $books = $bookManager->getBookById(null, (int) $id);
+        $books = $bookManager->getBooksByUserId((int) $id);
 
         $userManager = new UserManager();
         $user = $userManager->getUserById( (int) $id);

@@ -39,7 +39,8 @@ header {
 .navbar__content {
   display: flex;
   align-items: center;
-  flex-direction: column; /* Changed */
+  flex-direction: flex; 
+  width: 100%;
 }
 .navbar__list {
   list-style: none;
@@ -57,6 +58,10 @@ header {
   margin-bottom: 15px;
 }
 
+.navbar__list li:nth-child(2) {
+  border-right: 1px solid #A6A6A6;
+  padding-right: 20%;
+}
 .active {
   font-weight: bold;
 }
@@ -504,6 +509,8 @@ footer {
   display: block !important; /* Show menu icon */
   cursor: pointer;
   margin-right: 30px;
+  right: 10px;
+  position: absolute;
 }
 
 .navbar__list {
@@ -533,15 +540,14 @@ footer {
     margin: 0 150px;
   }
   .navbar__item {
-    margin-right: 1.7%;
+    margin: 0 auto;
     margin-bottom: 10px;
   }
   .navbar__list {
     flex-direction: row; /* Revert */
     display: flex !important; /* Show nav links */
     position: initial;
-    margin-left: 3%;
-    gap: 5%;
+ 
   }
   .navbar__content {
     min-width: 43%;
@@ -551,10 +557,7 @@ footer {
     transform: scaleX(-1);
     display: inline-block!important;
   }
-  div.navbar__content:nth-child(1) {
-    width: 50%;
-    border-right: 1px solid #A6A6A6;
-  }
+
 
   .navbar__menu-icon {
     display: none; /* Hide menu icon */
@@ -920,11 +923,11 @@ td {
   .profile__books thead th {
     text-align: left;
     font-size: 0.5rem;
-    padding: 20px 20px; /* Adjusted padding for mobile */
+    padding: 20px 20px; 
   }
 
   .profile__books thead th:first-child {
-    padding-left: 20px; /* Adjusted padding for mobile */
+    padding-left: 20px; /
   }
 
   .profileBooks__table tr:last-child td:first-child {
@@ -981,12 +984,22 @@ td {
     order: 5;
     margin: 2% 0 0;
   }
-  td {
+  .profileBooks__table td {
     width: 15% !important;
   }
-  th {
+  
+  .profileBooks__table th {
     width: 12.2% !important;
   }
+  
+  .profileBooks__table.white__background td {
+    width: 25% !important;
+  }
+  
+  .profileBooks__table.white__background th {
+    width: 20% !important;
+  }
+
   .tablook {
     margin: 0;
     padding: 2%;

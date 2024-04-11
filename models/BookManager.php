@@ -30,69 +30,58 @@ class BookManager extends AbstractEntityManager
         return $lastsbooks;
     }
     /**
-     * Récupère le livre par son ID ou l'ID de l'utilisateur.
-     * @param int|null $id
-     * @param int|null $userId
+     * Récupère le livre par son ID.
+     * @param int $id
      * @return Book|null
      */
-    public function getBookById(?int $id = null, ?int $userId = null)
+    public function getBookById(int $id): ?Book
     {
         $sql = "SELECT books.*, users.pseudo, users.image AS userImage
-            FROM books 
-            INNER JOIN users ON books.user_id = users.id";
+        FROM books 
+        INNER JOIN users ON books.user_id = users.id
+        WHERE books.id = :id";
 
-        if ($id !== null) {
-            $sql .= " WHERE books.id = :id";
-            $params = ["id" => $id];
+        $params = ["id" => $id];
 
-            $stmt = $this->db->query($sql, $params);
-            $stmt->execute($params);
-
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if (!$result) {
-                return null;
-            }
-            $book = new Book($result);
-            return $book;
-
-        } elseif ($userId !== null) {
-            $sql .= " WHERE books.user_id = :userId ORDER BY books.id DESC";
-            $params = ["userId" => $userId];
-
-            $stmt = $this->db->query($sql, $params);
-            $stmt->execute(["userId" => $userId]);
-
-            $books = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $books[] = new Book($row);
-            }
-
-            return $books;
-        }
-    }
-
-    /**
-     * Récupère les livres d'un utilisateur par son ID
-     * @param int|null $id
-     * @return array|null
-     */
-    public function getBooksByUserId(?int $id = null)
-    {
-        $sql = "SELECT * FROM books WHERE user_id = :userId ORDER BY id DESC";
-        $params = ["userId" => $id];
-
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->db->query($sql, $params);
         $stmt->execute($params);
 
-        $books = [];
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        if (!$result) {
+            return null;
+        }
+
+        return new Book($result);
+    }
+
+
+    /**
+     * Récupère les livres par l'ID de l'utilisateur.
+     * @param int $userId
+     * @return array
+     */
+    public function getBooksByUserId(int $userId): array
+    {
+        $sql = "SELECT books.*, users.pseudo, users.image AS userImage
+        FROM books 
+        INNER JOIN users ON books.user_id = users.id
+        WHERE books.user_id = :userId
+        ORDER BY books.id DESC";
+
+        $params = ["userId" => $userId];
+
+        $stmt = $this->db->query($sql, $params);
+        $stmt->execute(["userId" => $userId]);
+
+        $books = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $books[] = new Book($row);
         }
 
         return $books;
     }
+
 
     /**
      * Récupère le livre par son nom ou son auteur.
