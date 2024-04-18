@@ -10,6 +10,6 @@
 
     </div>
     <div class="showBooks__cards  cardbook">
-        <?php include('views/templates/bookloop.php'); ?>
+        <?php include('views/templates/includes/bookloop.php'); ?>
     </div>
 </section>

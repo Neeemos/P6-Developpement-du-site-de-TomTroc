@@ -20,6 +20,8 @@
             <div class="navbar__content">
                 <a href="index.php?action=home" class="navbar__link"><img src="images/logo.svg"
                         alt="Logo officiel de TomTroc" class=""></a>
+                <input type="checkbox" id="menu-toggle" class="navbar__menu-toggle">
+                <label for="menu-toggle" class="navbar__menu-icon">&#9776;</label>
                 <ul class="navbar__list">
                     <li
                         class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "home")) ? 'active' : "" ?>">
@@ -29,20 +31,16 @@
                         class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "showBooks")) ? 'active' : "" ?>">
                         <a href="index.php?action=showBooks" class="navbar__link">Nos livres à l'échange</a>
                     </li>
-                </ul>
-            </div>
-            <div class="navbar__content">
-                <input type="checkbox" id="menu-toggle" class="navbar__menu-toggle">
-                <label for="menu-toggle" class="navbar__menu-icon">&#9776;</label>
-                <ul class="navbar__list">
                     <li
                         class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "messagerie")) ? 'active' : "" ?>">
-                        <a href="index.php?action=messagerie" class="navbar__link"><i class="fa-regular fa-comment flipped-icon"></i> Messagerie</a>
+                        <a href="index.php?action=messagerie" class="navbar__link"><i
+                                class="fa-regular fa-comment flipped-icon"></i> Messagerie</a>
                     </li>
                     <li
-                            class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "profile")) ? 'active' : "" ?>">
-                            <a href="index.php?action=profile" class="navbar__link"><i class="fa-regular fa-user flipped-icon"></i> Mon compte</a>
-                        </li>
+                        class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "profile")) ? 'active' : "" ?>">
+                        <a href="index.php?action=profile" class="navbar__link"><i
+                                class="fa-regular fa-user flipped-icon"></i> Mon compte</a>
+                    </li>
                     <?php if (isset($_SESSION["user"])) { ?>
                         <li>
                             <a href='index.php?action=logout' class="navbar__link">Déconnexion</a>

@@ -29,7 +29,6 @@ header {
 .navbar__link {
   color: var(--gris-fonce);
   text-decoration: none;
-  margin: 0 1rem;
   font-size: 16px;
 }
 
@@ -40,7 +39,8 @@ header {
 .navbar__content {
   display: flex;
   align-items: center;
-  flex-direction: column; /* Changed */
+  flex-direction: flex; 
+  width: 100%;
 }
 .navbar__list {
   list-style: none;
@@ -58,6 +58,10 @@ header {
   margin-bottom: 15px;
 }
 
+.navbar__list li:nth-child(2) {
+  border-right: 1px solid #A6A6A6;
+  padding-right: 20%;
+}
 .active {
   font-weight: bold;
 }
@@ -505,6 +509,8 @@ footer {
   display: block !important; /* Show menu icon */
   cursor: pointer;
   margin-right: 30px;
+  right: 10px;
+  position: absolute;
 }
 
 .navbar__list {
@@ -529,32 +535,29 @@ footer {
 }
 
 @media screen and (min-width: 1200px) {
-  .navbar {
-    justify-content: space-around; /* Revert */
-    padding: 30px;
+  .navbar { 
+    padding: 30px 30px 30px 0;
+    margin: 0 150px;
   }
   .navbar__item {
-    margin-right: 25px;
+    margin: 0 auto;
     margin-bottom: 10px;
   }
   .navbar__list {
     flex-direction: row; /* Revert */
     display: flex !important; /* Show nav links */
     position: initial;
-    margin-left: 3%;
+ 
   }
   .navbar__content {
-    min-width: 35%;
+    min-width: 43%;
     height: 19px;
   }
   .flipped-icon {
     transform: scaleX(-1);
     display: inline-block!important;
   }
-  div.navbar__content:nth-child(1) {
-    width: 50%;
-    border-right: 1px solid #A6A6A6;
-  }
+
 
   .navbar__menu-icon {
     display: none; /* Hide menu icon */
@@ -738,8 +741,12 @@ footer {
 
 .avatar__count {
   font-size: 14px;
+  
 }
-
+.avatar__count--public {
+  font-size: 14px;
+  margin-bottom: 60px;;
+}
 .personalInfo__title {
   margin: 0;
   margin-bottom: 26px;
@@ -887,12 +894,11 @@ td {
   }
 
   .profile__avatar {
-    padding-bottom: 93px; /* Reverted padding for larger screens */
+    padding-bottom: 90px; 
   }
 
   .profile__books {
     display: block; /* Reverted display for larger screens */
-    margin: auto; /* Centered for larger screens */
     flex-direction: row; /* Reverted flex direction for larger screens */
   }
   .profile__card {
@@ -904,6 +910,10 @@ td {
     padding: 8px;
     text-align: left;
     display: block;
+    border-radius: 15px 15px 0 0;
+  }
+  .white__background  {
+    background-color: white;
   }
   .tablook {
     padding: 0;
@@ -913,11 +923,11 @@ td {
   .profile__books thead th {
     text-align: left;
     font-size: 0.5rem;
-    padding: 20px 20px; /* Adjusted padding for mobile */
+    padding: 20px 20px; 
   }
 
   .profile__books thead th:first-child {
-    padding-left: 20px; /* Adjusted padding for mobile */
+    padding-left: 20px; /
   }
 
   .profileBooks__table tr:last-child td:first-child {
@@ -974,12 +984,22 @@ td {
     order: 5;
     margin: 2% 0 0;
   }
-  td {
+  .profileBooks__table td {
     width: 15% !important;
   }
-  th {
+  
+  .profileBooks__table th {
     width: 12.2% !important;
   }
+  
+  .profileBooks__table.white__background td {
+    width: 25% !important;
+  }
+  
+  .profileBooks__table.white__background th {
+    width: 20% !important;
+  }
+
   .tablook {
     margin: 0;
     padding: 2%;

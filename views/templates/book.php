@@ -12,7 +12,7 @@
             <h3 class="book__soustitle">Propriétaire</h3>
             <div class="book__userInformation userInformation">
                 <img class="userInformation__image"src="images/<?= $book->getuserImage() ?>" alt="image du propriétaire">
-                <p class="userInformation__text"><?= $book->getPseudo() ?></p>
+                <p class="userInformation__text"><a href="index.php?action=public&id=<?= $book->getuserId() ?>"> <?= $book->getPseudo() ?></a></p>
             </div>
             <a href="#" class="button button-green book__button">Envoyer un message</a>
         </div>
