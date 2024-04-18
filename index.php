@@ -8,6 +8,7 @@ require_once 'config/config.php';
 $action = Utils::request('action', 'home');
 $id = Utils::request('id');
 $query = Utils::request('query');
+$bookId = Utils::request('bookId');
 // Try catch global pour gérer les erreurs
 try {
     // Pour chaque action, on appelle le bon contrôleur et la bonne méthode.
@@ -52,8 +53,14 @@ try {
             $userController->showProfilePublic($id);
             break;
         case "editBook":
-            $bookController = new BookController();
-            $bookController->showEditBook($id);
+            if (isset($bookId)) {
+                $bookController = new BookController();
+                $bookController->editBook();
+
+            } else {
+                $bookController = new BookController();
+                $bookController->showEditBook($id);
+            }
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");
