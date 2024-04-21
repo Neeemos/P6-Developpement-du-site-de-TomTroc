@@ -109,5 +109,26 @@ class BookManager extends AbstractEntityManager
         return $json;
     }
 
+    /**
+     * Update un livre
+     * @param book $book
+     * @return Book
+     */
+    public function updateBook(?book $book )
+    {
+        $sql = "UPDATE books SET title = :title, author = :author, description = :description, available = :available WHERE id = :id";
+        $result = $this->db->query($sql, [
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'description' => $book->getDescription(),
+            'available' => $book->getAvailable(),
+            'id' => $book->getId()
+        ]);
+
+        if ($result) {
+            return $book; 
+        } 
+    }
+
 
 }

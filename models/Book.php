@@ -8,7 +8,7 @@ class Book extends AbstractEntity
     private string $title = "";
     private string $author = "";
     private string $description;
-    private bool $available;
+    private int $available;
     private string $image;
 
 

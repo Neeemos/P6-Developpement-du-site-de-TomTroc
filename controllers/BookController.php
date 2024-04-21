@@ -13,7 +13,6 @@ class BookController
 
         $view = new View("Accueil");
         $view->render("home", ['books' => $books]);
-
     }
 
     /**
@@ -44,8 +43,7 @@ class BookController
         $view->render('book', ['book' => $book]);
     }
 
- /**
-     * Affiche la page d'un livre.
+    /**
      * @param string $query
      * @return void
      */
@@ -56,6 +54,67 @@ class BookController
 
         header('Content-Type: application/json');
         echo $book;
+    }
 
+    /**
+     * Affiche la page d'edition d'un livre.
+     * @param int $id
+     * @return void
+     */
+    public function showEditBook($id): void
+    {
+        Access::checkUserLoggedIn();
+
+        $bookManager = new BookManager();
+        $book = $bookManager->getBookById((int) $id);
+        if (!$book) {
+            throw new Exception("Le livre demandé n'existe pas.");
+        }
+
+        if ($_SESSION["user"]->getId() != $book->getuserId()) {
+            throw new Exception("Le livre demandé n'existe pas");
+        }
+
+        $view = new View('ShowEditBook');
+        $view->render('editBook', ['book' => $book]);
+    }
+
+    public function editBook(): void
+    {
+        Access::checkUserLoggedIn();
+        $id = Utils::request("bookId");
+
+        $bookManager = new BookManager();
+        $book = $bookManager->getBookById($id);
+        if (!$book) {
+            throw new Exception("Le livre demandé n'existe pas.");
+        }
+        if ($_SESSION["user"]->getId() != $book->getuserId()) {
+            throw new Exception("Le livre demandé n'existe pas..");
+        }
+        // Récupération des données du formulaire.
+        $title = Utils::request("titre");
+        $author = Utils::request("auteur");
+        $description = Utils::request("commentaire");
+        $available = Utils::request("disponibilite");
+
+
+        // On vérifie que les données sont valides.
+        if (empty($title) || empty($author) || !isset($available) || empty($description) || empty($id)) {
+            throw new Exception("Tous les champs sont obligatoires. 3");
+        }
+
+        $book->setTitle($title);
+        $book->setAuthor($author);
+        $book->setDescription($description);
+        $book->setAvailable($available);
+
+        $result = $bookManager->updateBook($book);
+
+        if (!$result) {
+            throw new Exception("Une erreur est survenue lors de la modification du livre.");
+        }
+
+        Utils::redirect("editBook", ['id' => $book->getId()]);
     }
 }

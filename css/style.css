@@ -39,7 +39,7 @@ header {
 .navbar__content {
   display: flex;
   align-items: center;
-  flex-direction: flex; 
+  flex-direction: flex;
   width: 100%;
 }
 .navbar__list {
@@ -59,7 +59,7 @@ header {
 }
 
 .navbar__list li:nth-child(2) {
-  border-right: 1px solid #A6A6A6;
+  border-right: 1px solid #a6a6a6;
   padding-right: 20%;
 }
 .active {
@@ -67,7 +67,7 @@ header {
 }
 
 .flipped-icon {
- display: none!important;
+  display: none !important;
 }
 .home {
   background-color: var(--gris-clair);
@@ -533,9 +533,49 @@ footer {
   transform: translateY(-50%);
   color: var(--gris-texte);
 }
-
+.editBook__background {
+  background-color: white;
+  padding: 20px 20px 40px 20px;
+  border-radius: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+}
+.editBook__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.editBook__text {
+  line-height: 0;
+  color: var(--gris-texte);
+}
+.editBook__image {
+  object-fit: cover;
+  width: 100%;
+  max-height: 400px;
+}
+.editBook__link {
+  justify-content: flex-end;
+  display: flex;
+  margin: 15px;
+  color: var(--gris-texte);
+}
+.editBook__hidden {
+  display: none;  
+}
+.button__full {
+  width: 100%;
+}
+.editInfo__textarea {
+  resize: none;
+  min-height: 350px;
+  padding: 20px!important;
+}
 @media screen and (min-width: 1200px) {
-  .navbar { 
+  .editBook__card {
+    width: 45%;
+  }
+  .navbar {
     padding: 30px 30px 30px 0;
     margin: 0 150px;
   }
@@ -547,7 +587,6 @@ footer {
     flex-direction: row; /* Revert */
     display: flex !important; /* Show nav links */
     position: initial;
- 
   }
   .navbar__content {
     min-width: 43%;
@@ -555,9 +594,8 @@ footer {
   }
   .flipped-icon {
     transform: scaleX(-1);
-    display: inline-block!important;
+    display: inline-block !important;
   }
-
 
   .navbar__menu-icon {
     display: none; /* Hide menu icon */
@@ -650,6 +688,13 @@ footer {
   .book__content {
     width: 40%;
   }
+  .editInfo {
+    width: 45%;
+  }
+  .editBook__background {
+    flex-direction: row;
+    justify-content: space-around;
+  }
 }
 
 .navbar__menu-toggle {
@@ -741,11 +786,10 @@ footer {
 
 .avatar__count {
   font-size: 14px;
-  
 }
 .avatar__count--public {
   font-size: 14px;
-  margin-bottom: 60px;;
+  margin-bottom: 60px;
 }
 .personalInfo__title {
   margin: 0;
@@ -894,7 +938,7 @@ td {
   }
 
   .profile__avatar {
-    padding-bottom: 90px; 
+    padding-bottom: 90px;
   }
 
   .profile__books {
@@ -912,7 +956,7 @@ td {
     display: block;
     border-radius: 15px 15px 0 0;
   }
-  .white__background  {
+  .white__background {
     background-color: white;
   }
   .tablook {
@@ -923,11 +967,11 @@ td {
   .profile__books thead th {
     text-align: left;
     font-size: 0.5rem;
-    padding: 20px 20px; 
+    padding: 20px 20px;
   }
 
   .profile__books thead th:first-child {
-    padding-left: 20px; /
+    padding-left: 20px;
   }
 
   .profileBooks__table tr:last-child td:first-child {
@@ -987,15 +1031,15 @@ td {
   .profileBooks__table td {
     width: 15% !important;
   }
-  
+
   .profileBooks__table th {
     width: 12.2% !important;
   }
-  
+
   .profileBooks__table.white__background td {
     width: 25% !important;
   }
-  
+
   .profileBooks__table.white__background th {
     width: 20% !important;
   }
