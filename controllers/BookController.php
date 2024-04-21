@@ -71,9 +71,7 @@ class BookController
             throw new Exception("Le livre demandé n'existe pas.");
         }
 
-        if ($_SESSION["user"]->getId() != $book->getuserId()) {
-            throw new Exception("Le livre demandé n'existe pas");
-        }
+        Access::validateUserOwnership($_SESSION["user"], $book);
 
         $view = new View('ShowEditBook');
         $view->render('editBook', ['book' => $book]);
@@ -89,9 +87,7 @@ class BookController
         if (!$book) {
             throw new Exception("Le livre demandé n'existe pas.");
         }
-        if ($_SESSION["user"]->getId() != $book->getuserId()) {
-            throw new Exception("Le livre demandé n'existe pas..");
-        }
+        Access::validateUserOwnership($_SESSION["user"], $book);
         // Récupération des données du formulaire.
         $title = Utils::request("titre");
         $author = Utils::request("auteur");
@@ -116,5 +112,23 @@ class BookController
         }
 
         Utils::redirect("editBook", ['id' => $book->getId()]);
+    }
+    public function deleteBook(): void
+    {
+        Access::checkUserLoggedIn();
+
+        $id = Utils::request("id");
+
+        $bookManager = new BookManager();
+        $book = $bookManager->getBookById($id);
+
+        if (!$book) {
+            throw new Exception("Le livre demandé n'existe pas.");
+        }
+
+        Access::validateUserOwnership($_SESSION["user"], $book);
+
+        $bookManager->deleteBook($book);
+        Utils::redirect("profile");
     }
 }
