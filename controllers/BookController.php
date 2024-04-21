@@ -13,7 +13,6 @@ class BookController
 
         $view = new View("Accueil");
         $view->render("home", ['books' => $books]);
-
     }
 
     /**
@@ -55,7 +54,6 @@ class BookController
 
         header('Content-Type: application/json');
         echo $book;
-
     }
 
     /**
@@ -65,40 +63,47 @@ class BookController
      */
     public function showEditBook($id): void
     {
+        Access::checkUserLoggedIn();
+
         $bookManager = new BookManager();
         $book = $bookManager->getBookById((int) $id);
         if (!$book) {
             throw new Exception("Le livre demandé n'existe pas.");
         }
+
+        if ($_SESSION["user"]->getId() != $book->getuserId()) {
+            throw new Exception("Le livre demandé n'existe pas");
+        }
+
         $view = new View('ShowEditBook');
         $view->render('editBook', ['book' => $book]);
     }
 
-    public function editBook(): void 
+    public function editBook(): void
     {
-        // Check if user is logged in
-        if (!isset($_SESSION["user"])) {
-            header("Location: index.php?action=login");
-            exit();
-        }
-        
-        // Récupération des données du formulaire.
-        $title = Utils::request("titre");
-        $author = Utils::request("auteur");
-        $description = Utils::request("commentaire");
-        $available = Utils::request("disponibilite");
+        Access::checkUserLoggedIn();
         $id = Utils::request("bookId");
-
-        // On vérifie que les données sont valides.
-        if (empty($title) || empty($author) || !isset($available) || empty($description) || empty($id)) {
-            throw new Exception("Tous les champs sont obligatoires. 3");
-        }
 
         $bookManager = new BookManager();
         $book = $bookManager->getBookById($id);
         if (!$book) {
             throw new Exception("Le livre demandé n'existe pas.");
         }
+        if ($_SESSION["user"]->getId() != $book->getuserId()) {
+            throw new Exception("Le livre demandé n'existe pas..");
+        }
+        // Récupération des données du formulaire.
+        $title = Utils::request("titre");
+        $author = Utils::request("auteur");
+        $description = Utils::request("commentaire");
+        $available = Utils::request("disponibilite");
+
+
+        // On vérifie que les données sont valides.
+        if (empty($title) || empty($author) || !isset($available) || empty($description) || empty($id)) {
+            throw new Exception("Tous les champs sont obligatoires. 3");
+        }
+
         $book->setTitle($title);
         $book->setAuthor($author);
         $book->setDescription($description);

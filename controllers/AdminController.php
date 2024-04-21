@@ -28,17 +28,7 @@ class AdminController
         $view = new View("register");
         $view->render("register");
     }
-    /**
-     * Vérifie que l'utilisateur est connecté.
-     * @return void
-     */
-    private function checkIfUserIsConnected(): void
-    {
-        // On vérifie que l'utilisateur est connecté.
-        if (!isset($_SESSION['user'])) {
-            Utils::redirect("login");
-        }
-    }
+
     /**
      * Connexion de l'utilisateur.
      * @return void
@@ -69,7 +59,7 @@ class AdminController
 
         // On connecte l'utilisateur.
         $_SESSION['user'] = $user;
-        
+
 
         // On redirige vers la page d'administration.
         Utils::redirect("home");

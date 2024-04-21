@@ -5,10 +5,7 @@ class UserController
     public function showProfile(): void
     {
         // Check if user is logged in
-        if (!isset($_SESSION["user"])) {
-            header("Location: index.php?action=login");
-            exit();
-        }
+        Access::checkUserLoggedIn();
 
         // Unserialize the user object
         $user = $_SESSION["user"];
@@ -26,7 +23,7 @@ class UserController
         $books = $bookManager->getBooksByUserId((int) $id);
 
         $userManager = new UserManager();
-        $user = $userManager->getUserById( (int) $id);
+        $user = $userManager->getUserById((int) $id);
         if (!$user) {
             throw new Exception("L'utilisateur n'existe pas");
         }
