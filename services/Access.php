@@ -22,4 +22,17 @@ class Access
             exit();
         }
     }
+    /**
+     * Check if the user is the owner of the book.
+     *
+     * @param object $user The user object
+     * @param object $book The book object
+     * @return void 
+     */
+    public static function validateUserOwnership($user, $book)
+    {
+        if ($user->getId() != $book->getUserId()) {
+            throw new Exception("Vous ne pouvez pas accéder à ce livre");
+        }
+    }
 }

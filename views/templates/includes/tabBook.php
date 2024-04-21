@@ -46,7 +46,7 @@
                             </td>
                             <td class="tablook__edit-delete">
                                 <a href="index.php?action=editBook&id=<?php echo $book->getId(); ?>" class="edit">Éditer</a>
-                                <a href="#" class="delete">Supprimer</a>
+                                <a href="index.php?action=deleteBook&id=<?php echo $book->getId(); ?>" class="delete">Supprimer</a>
                             </td>
                         <?php endif; ?>
                     </tr>
