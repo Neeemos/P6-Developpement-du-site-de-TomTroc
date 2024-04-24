@@ -35,4 +35,14 @@ class Access
             throw new Exception("Vous ne pouvez pas accéder à ce livre");
         }
     }
+
+
+    public static function checkMessageOwnership($message)
+    {
+        if ($message->getIdSender() == $_SESSION["user"]->getId()) {
+            return $message->getIdReceiver();
+        } else {
+            return $message->getIdSender();
+        }
+    }
 }

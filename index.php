@@ -13,7 +13,7 @@ $bookId = Utils::request('bookId');
 try {
     // Pour chaque action, on appelle le bon contrôleur et la bonne méthode.
     switch ($action) {
-        // Pages accessibles à tous.
+            // Pages accessibles à tous.
         case 'home':
             $BookController = new BookController();
             $BookController->showHome();
@@ -30,7 +30,6 @@ try {
             if (isset($query)) {
                 $bookController = new BookController();
                 $bookController->ShowBooksByNameOrAutor($query);
-
             } else {
                 $bookController = new BookController();
                 $bookController->showBooks();
@@ -56,16 +55,19 @@ try {
             if (isset($bookId)) {
                 $bookController = new BookController();
                 $bookController->editBook();
-
             } else {
                 $bookController = new BookController();
                 $bookController->showEditBook($id);
             }
             break;
-            case "deleteBook":
-                $userController = new BookController();
-                $userController->deleteBook();
-                break;
+        case "deleteBook":
+            $userController = new BookController();
+            $userController->deleteBook();
+            break;
+        case "messagerie":
+            $userController = new UserController();
+            $userController->showMessagerie();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

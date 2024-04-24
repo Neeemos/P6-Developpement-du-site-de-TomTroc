@@ -85,4 +85,53 @@ class UserManager extends AbstractEntityManager
         }
         return new User($result);
     }
+
+    public function getUserMessages()
+    {
+        $sql = "SELECT * FROM messages WHERE id_sender = :id OR id_receiver = :id ORDER BY date DESC";
+        $params = ["id" => $_SESSION['user']->getId()];
+        $stmt = $this->db->query($sql, $params);
+        $stmt->execute($params);
+
+        $messages = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $messages[] = new message($row);
+        }
+
+        return $messages;
+    }
+    public function getUserListMessage()
+    {
+        $sql = "
+        WITH unique_ids AS (
+            SELECT id_sender AS id
+            FROM messages
+            WHERE (id_sender = :id OR id_receiver = :id)
+                AND id_sender <> :current_user_id
+            UNION
+            SELECT id_receiver AS id
+            FROM messages
+            WHERE (id_sender = :id OR id_receiver = :id)
+                AND id_receiver <> :current_user_id
+        )
+        SELECT u.*
+        FROM users u
+        JOIN unique_ids ui ON u.id = ui.id
+        ORDER BY u.id;
+    ";
+
+        $params = [
+            "id" => $_SESSION['user']->getId(),
+            "current_user_id" => $_SESSION['user']->getId()
+        ];
+        $stmt = $this->db->query($sql, $params);
+        $stmt->execute($params);
+
+        $users = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $users[] = new User($row); // Store the row of user information
+        }
+
+        return $users;
+    }
 }

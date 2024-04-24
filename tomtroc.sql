@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 08 mars 2024 à 09:35
+-- Généré le : mer. 24 avr. 2024 à 13:28
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -42,11 +42,11 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`id`, `user_id`, `title`, `author`, `description`, `available`, `image`) VALUES
-(1, 6, 'Titre Livre 1', 'Auteur 1', 'Description du livre 1', 1, 'hamza-nouasria.jpg'),
-(2, 6, 'Titre Livre 2', 'Auteur 2', 'Description du livre 2', 0, 'hamza-nouasria.jpg'),
-(3, 3, 'Titre Livre 3', 'Auteur 3', 'Description du livre 3', 1, 'hamza-nouasria.jpg'),
+(3, 3, 'Titre de livre', 'Auteur numéro 1', 'Description Description du livre 3', 1, 'hamza-nouasria.jpg'),
 (4, 3, 'Titre Livre 3', 'Auteur 3', 'Description du livre 3', 1, 'hamza-nouasria.jpg'),
-(5, 3, 'Titre Livre 3', 'Auteur 3', 'Description du livre 3', 1, 'hamza-nouasria.jpg');
+(5, 3, 'Titre Livre 3', 'Auteur 3', 'Description du livre 3', 1, 'hamza-nouasria.jpg'),
+(7, 6, 'Titre de livrez', 'Auteur numéro 1z', 'Description Description du livre 3z', 1, 'hamza-nouasria.jpg'),
+(8, 6, 'Titre de livrezz', 'Auteur numéro 1zz', 'Description Description du livre 3\r\n', 1, 'hamza-nouasria.jpg');
 
 -- --------------------------------------------------------
 
@@ -77,19 +77,21 @@ INSERT INTO `chats` (`id`, `user_1`, `user_2`) VALUES
 
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
-  `chat_id` int(11) DEFAULT NULL,
   `message` text DEFAULT NULL,
-  `date` datetime DEFAULT NULL
+  `date` datetime DEFAULT NULL,
+  `id_sender` int(11) NOT NULL,
+  `id_receiver` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `messages`
 --
 
-INSERT INTO `messages` (`id`, `chat_id`, `message`, `date`) VALUES
-(1, 1, 'Bonjour !', '2024-02-01 08:45:00'),
-(2, 2, 'Salut !', '2024-02-01 09:30:00'),
-(3, 3, 'Hello !', '2024-02-01 10:15:00');
+INSERT INTO `messages` (`id`, `message`, `date`, `id_sender`, `id_receiver`) VALUES
+(4, 'Bonjour', '2024-04-21 17:30:32', 6, 7),
+(5, 'Bonsoir, tu viens demain au restaurant?', '2024-04-21 17:30:35', 7, 6),
+(6, 'Bonjour2\r\n', '2024-04-21 17:30:32', 6, 7),
+(7, 'Bonjour2\r\n', '2024-04-21 17:30:32', 3, 6);
 
 -- --------------------------------------------------------
 
@@ -142,7 +144,8 @@ ALTER TABLE `chats`
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `chat_id` (`chat_id`);
+  ADD KEY `fk_id_sender` (`id_sender`),
+  ADD KEY `fk_id_receiver` (`id_receiver`);
 
 --
 -- Index pour la table `users`
@@ -158,7 +161,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `chats`
@@ -170,7 +173,7 @@ ALTER TABLE `chats`
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `users`
@@ -199,7 +202,8 @@ ALTER TABLE `chats`
 -- Contraintes pour la table `messages`
 --
 ALTER TABLE `messages`
-  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`chat_id`) REFERENCES `chats` (`id`);
+  ADD CONSTRAINT `fk_id_receiver` FOREIGN KEY (`id_receiver`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `fk_id_sender` FOREIGN KEY (`id_sender`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
