@@ -1,5 +1,5 @@
     <div class="message">
-        <section class="message__overlay overlay" style="display: none;">
+        <section class="message__overlay overlay" >
             <h2 class=" overlay__title">Messagerie</h2>
             <?php foreach ($messages as $message) {
             ?>
