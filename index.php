@@ -13,7 +13,7 @@ $bookId = Utils::request('bookId');
 try {
     // Pour chaque action, on appelle le bon contrôleur et la bonne méthode.
     switch ($action) {
-            // Pages accessibles à tous.
+        // Pages accessibles à tous.
         case 'home':
             $BookController = new BookController();
             $BookController->showHome();
@@ -67,6 +67,14 @@ try {
         case "messagerie":
             $userController = new UserController();
             $userController->showMessagerie();
+            break;
+        case "getMessagerieList":
+            $userController = new UserController();
+            $userController->showMessagerieList();
+            break;
+        case "getConversationMessages":
+            $userController = new UserController();
+            $userController->showConversationMessages();
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");

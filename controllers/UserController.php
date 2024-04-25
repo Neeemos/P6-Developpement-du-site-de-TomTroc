@@ -35,7 +35,7 @@ class UserController
     public function showMessagerie(): void
     {
         Access::checkUserLoggedIn();
-        
+
         $userManager = new UserManager();
         $messages = $userManager->getUserMessages();
         $listUser = $userManager->getUserListMessage();
@@ -43,5 +43,26 @@ class UserController
         // Render view
         $view = new View('ShowMessagerie');
         $view->render('messagerie', ['messages' => $messages, 'listUser' => $listUser]);
+    }
+    public function showMessagerieList()
+    {
+        Access::checkUserLoggedIn();
+
+        $userManager = new UserManager();
+        $listUser = $userManager->getUserListMessage();
+
+        header('Content-Type: application/json');
+        echo json_encode($listUser);
+    }
+
+    public function showConversationMessages()
+    {
+        Access::checkUserLoggedIn();
+        $conversationId = (int) Utils::request("userId");
+        $userManager = new UserManager();
+        $Conversation = $userManager->getConversationMessages((int) $conversationId);
+
+        header('Content-Type: application/json');
+        echo json_encode($Conversation);
     }
 }

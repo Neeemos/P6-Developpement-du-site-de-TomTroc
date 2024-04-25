@@ -70,6 +70,7 @@
         </a>
     </footer>
     <?= (isset($_GET['action']) && !empty($_GET['action'] == "showBooks")) ? '<script src="views/js/filterbooks.js"></script>' : "" ?>
+    <?= (isset($_GET['action']) && !empty($_GET['action'] == "messagerie")) ? '<script src="views/js/listMessages.js"></script>' : "" ?>
 </body>
 
 </html>
