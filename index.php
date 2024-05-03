@@ -76,6 +76,10 @@ try {
             $userController = new UserController();
             $userController->showConversationMessages();
             break;
+        case "addMessage": 
+            $userController = new UserController();
+            $userController->addMessage();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

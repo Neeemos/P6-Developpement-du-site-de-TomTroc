@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             // Select the message overlay section
             const messageOverlay = document.querySelector('.message__overlay.overlay');
-
+            const header = document.querySelector('.discussion__top.topdiscussion');
             // Loop through the array data to build HTML
             data.forEach(user => {
                 // Create elements
@@ -57,63 +57,37 @@ document.addEventListener("DOMContentLoaded", function () {
                     event.preventDefault(); // Prevent default link behavior
 
                     const userId = overlayLinkHiddenInput.value; // Get user ID from hidden input
+                    // Remove existing header elements
+                    while (header.firstChild) {
+                        header.removeChild(header.firstChild);
+                    }
 
-                    // Fetch conversation messages
-                    fetch('index.php?action=getConversationMessages&userId=' + userId)
-                        .then(response => response.json())
-                        .then(data => {
-                            // Select message discussion section
-                            const messageDiscussion = document.querySelector('.discussion__messages.messages');
+                    // Create elements header
+                    const headerIcon = document.createElement('a');
+                    headerIcon.classList.add('topdiscussion__icon');
+                    headerIcon.href = '#';
+                    headerIcon.innerHTML = '<i class="fa-solid fa-arrow-left"></i> retour';
 
-                            // Clear previous messages
-                            messageDiscussion.innerHTML = '';
+                    const headerLink = document.createElement('a');
+                    headerLink.classList.add('topdiscussion__link');
+                    headerLink.href = 'index.php?action=public&id=' + user.id;
 
-                            // Loop through the array data to build HTML for messages
-                            data.forEach(message => {
-                                var messageProfilePicture; // Declare the variable here
+                    const headerImage = document.createElement('img');
+                    headerImage.classList.add('topdiscussion__image');
+                    headerImage.src = user.image ? 'images/' + user.image : 'images/darwin-vegher.jpg';
+                    headerImage.alt = 'Photo de profil';
 
-                                const idReceiver = parseInt(message.id_receiver);
-                                const sessionId = parseInt(message.session_id);
-                                const idSender = parseInt(message.id_sender);
+                    const headerUsername = document.createElement('p');
+                    headerUsername.classList.add('topdiscussion__username');
+                    headerUsername.textContent = user.pseudo;
 
-                                const messageBox = document.createElement('div');
-                                if (idSender == sessionId) {
-                                    messageBox.classList.add('messages__sender', 'message__box');
-                                } else {
-                                    messageBox.classList.add('messages__receiver', 'message__box');
-                                }
-                                const messageDateTime = document.createElement('p');
+                    // Append elements to header
+                    headerLink.appendChild(headerImage);
+                    headerLink.appendChild(headerUsername);
+                    header.appendChild(headerIcon);
+                    header.appendChild(headerLink);
 
-                                if (idReceiver == sessionId) {
-                                    // Create img element (no need to redeclare messageProfilePicture)
-                                    messageProfilePicture = document.createElement('img');
-                                    messageProfilePicture.classList.add('messages__photo');
-                                    messageProfilePicture.src = message.image ? 'images/' + message.image : 'images/darwin-vegher.jpg';
-                                    messageProfilePicture.alt = 'Photo de profil';
-                                }
-                                messageDateTime.classList.add('message__date-time');
-                                messageDateTime.textContent = formatDateConversation(message.date);
-                                const messageBlock = document.createElement('div');
-                                messageBlock.classList.add('message__block');
-                                const messageContent = document.createElement('p');
-                                if (idReceiver !== sessionId) {
-                                    messageContent.classList.add('message__content-sender');
-                                } else {
-                                    messageContent.classList.add('message__content');
-                                }
-                                messageContent.textContent = message.message;
-
-                                if (messageProfilePicture) {
-                                    messageBox.appendChild(messageProfilePicture);
-                                }
-                                messageBox.appendChild(messageDateTime);
-                                messageBox.appendChild(messageBlock);
-                                messageBlock.appendChild(messageContent);
-                                messageDiscussion.appendChild(messageBox);
-                            });
-
-                        })
-                        .catch(error => console.error('Error fetching conversation messages:', error));
+                    fetchAndDisplayConversationMessages(userId);
                 });
             });
         })
@@ -129,3 +103,71 @@ function formatDate(dateString) {
 function formatDateConversation(dateString) {
     return new Date(dateString).toLocaleTimeString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', separator: '.' });
 }
+
+function fetchAndDisplayConversationMessages(userId) {
+    // Fetch conversation messages
+    fetch('index.php?action=getConversationMessages&userId=' + userId)
+        .then(response => response.json())
+        .then(data => {
+            // Select message discussion section
+            const messageDiscussion = document.querySelector('.discussion__messages.messages');
+            // Select user ID input hidden field
+            const userIdInput = document.querySelector('input[name="userId"]');
+            userIdInput.value = userId;
+            // Clear previous messages
+            messageDiscussion.innerHTML = '';
+
+            // Loop through the array data to build HTML for messages
+            data.forEach(message => {
+                const idReceiver = parseInt(message.id_receiver);
+                const sessionId = parseInt(message.session_id);
+
+                const messageBox = document.createElement('div');
+                if (message.id_sender == sessionId) {
+                    messageBox.classList.add('messages__sender', 'message__box');
+                } else {
+                    messageBox.classList.add('messages__receiver', 'message__box');
+                }
+                const messageDateTime = document.createElement('p');
+
+                if (idReceiver == sessionId) {
+                    const messageProfilePicture = document.createElement('img');
+                    messageProfilePicture.classList.add('messages__photo');
+                    messageProfilePicture.src = message.image ? 'images/' + message.image : 'images/darwin-vegher.jpg';
+                    messageProfilePicture.alt = 'Photo de profil';
+                    messageBox.appendChild(messageProfilePicture);
+                }
+                messageDateTime.classList.add('message__date-time');
+                messageDateTime.textContent = formatDateConversation(message.date);
+                const messageBlock = document.createElement('div');
+                messageBlock.classList.add('message__block');
+                const messageContent = document.createElement('p');
+                messageContent.classList.add(idReceiver !== sessionId ? 'message__content-sender' : 'message__content');
+                messageContent.textContent = message.message;
+
+                messageBox.appendChild(messageDateTime);
+                messageBox.appendChild(messageBlock);
+                messageBlock.appendChild(messageContent);
+                messageDiscussion.appendChild(messageBox);
+            });
+
+        })
+        .catch(error => console.error('Error fetching conversation messages:', error));
+}
+
+function submitMessageViaAjax(event) {
+    event.preventDefault(); // Prevent default form submission
+    const form = event.target;
+    const formData = new FormData(form);
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json()
+            .then(data => {
+                fetchAndDisplayConversationMessages(formData.get('userId'))
+            }))
+        .catch(error => console.error('Error adding message:', error));
+}
+
+document.getElementById('add-message-form').addEventListener('submit', submitMessageViaAjax);

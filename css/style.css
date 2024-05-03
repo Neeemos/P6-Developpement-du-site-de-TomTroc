@@ -632,7 +632,7 @@ footer {
 }
 .overlay__card.overlay__receiver {
   background-color: white;
-} 
+}
 .overlay__link {
   display: flex;
   flex-wrap: wrap;
@@ -706,6 +706,10 @@ footer {
   width: 100%;
   background-color: var(--gris-clair);
   padding-bottom: 30px;
+  height: 500px;
+  overflow-y: auto;
+  overflow-x: clip;
+  white-space: nowrap;
 }
 
 .messages__sender {
@@ -985,8 +989,6 @@ footer {
     flex-direction: row;
     gap: 2%;
     margin-left: 30px;
-  
-
   }
   .botdiscussion__input {
     width: 85%;

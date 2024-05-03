@@ -85,68 +85,35 @@ class UserManager extends AbstractEntityManager
         }
         return new User($result);
     }
-    /**
-     * récupère les messages d'un user
-     * @return array
-     */
-    public function getUserMessages()
-    {
-        $sql = "SELECT * FROM messages WHERE id_sender = :id OR id_receiver = :id ORDER BY date DESC";
-        $params = ["id" => $_SESSION['user']->getId()];
-        $stmt = $this->db->query($sql, $params);
-        $stmt->execute($params);
 
-        $messages = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $messages[] = new message($row);
-        }
-
-        return $messages;
-    }
     public function getUserListMessage()
     {
-        $sql = "SELECT 
-        m1.message, 
-        m1.date, 
-        COALESCE(sender_pseudo.pseudo, receiver_pseudo.pseudo) AS pseudo,
-        COALESCE(sender_pseudo.image, receiver_pseudo.image) AS image,
-        m1.id_sender, 
-        m1.id_receiver,
+        $sql = "
+        SELECT 
+        m.id_sender,
+        m.id_receiver,
+        m.message AS message,
+        m.date AS date,
+        u.pseudo AS pseudo,
+        u.image AS image,
         :user_id AS session_id
     FROM 
-        messages m1
-    LEFT JOIN 
-        users sender_pseudo 
-        ON m1.id_sender <> :user_id AND m1.id_sender = sender_pseudo.id 
-    LEFT JOIN 
-        users receiver_pseudo 
-        ON m1.id_receiver <> :user_id AND m1.id_receiver = receiver_pseudo.id 
-    JOIN (
-        SELECT 
-            MAX(date) AS max_date, 
-            CASE
-                WHEN id_sender = :user_id THEN id_receiver
-                ELSE id_sender
-            END AS other_person
-        FROM 
-            messages
-        WHERE 
-            id_sender = :user_id OR id_receiver = :user_id
-        GROUP BY 
-            CASE
-                WHEN id_sender = :user_id THEN id_receiver
-                ELSE id_sender
-            END
-    ) m2
-    ON (
-        m1.date = m2.max_date 
-        AND (
-            (m1.id_sender = :user_id AND m1.id_receiver = m2.other_person) 
-            OR 
-            (m1.id_receiver = :user_id AND m1.id_sender = m2.other_person)
+        messages m
+    JOIN 
+        users u ON u.id = CASE 
+                            WHEN m.id_sender = :user_id THEN m.id_receiver
+                            ELSE m.id_sender
+                         END
+    WHERE 
+        (m.id_receiver = :user_id OR m.id_sender = :user_id)
+        AND m.date = (
+            SELECT MAX(date)
+            FROM messages
+            WHERE (id_sender = m.id_sender AND id_receiver = m.id_receiver)
+                OR (id_sender = m.id_receiver AND id_receiver = m.id_sender)
         )
-    )
-    ";
+    ORDER BY 
+        date DESC;  ";
 
         $params = [
             "user_id" => $_SESSION['user']->getId()
@@ -164,17 +131,17 @@ class UserManager extends AbstractEntityManager
     public function getConversationMessages(int $conversationId)
     {
         $sql = "SELECT messages.*, 
-        conversation.image AS image, 
+        user.image AS image, 
         :user_id AS session_id 
  FROM messages
- LEFT JOIN users AS conversation ON conversation.id = :conversation_id
- WHERE (id_sender = :user_id AND id_receiver = :conversation_id) 
-    OR (id_sender = :conversation_id AND id_receiver = :user_id) 
+ LEFT JOIN users AS user ON user.id = :receiver_id
+ WHERE (id_sender = :user_id AND id_receiver = :receiver_id) 
+    OR (id_sender = :receiver_id AND id_receiver = :user_id) 
  ORDER BY date ASC";
 
         $params = [
             "user_id" => $_SESSION['user']->getId(),
-            "conversation_id" => $conversationId
+            "receiver_id" => $conversationId
         ];
         $stmt = $this->db->query($sql, $params);
         $stmt->execute($params);
@@ -185,6 +152,17 @@ class UserManager extends AbstractEntityManager
         }
 
         return $conversation;
+
+    }
+    public function addMessage(string $message, int $receiverId)
+    {
+        $sql = "INSERT INTO messages (id, message, date, id_sender, id_receiver) VALUES (null, :message, NOW(), :id_sender, :id_receiver)";
+        $params = [
+            "id_sender" => $_SESSION['user']->getId(),
+            "id_receiver" => $receiverId,
+            "message" => $message
+        ];
+        $stmt = $this->db->query($sql, $params);
 
     }
 }

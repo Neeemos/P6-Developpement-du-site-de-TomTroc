@@ -36,13 +36,8 @@ class UserController
     {
         Access::checkUserLoggedIn();
 
-        $userManager = new UserManager();
-        $messages = $userManager->getUserMessages();
-        $listUser = $userManager->getUserListMessage();
-
-        // Render view
         $view = new View('ShowMessagerie');
-        $view->render('messagerie', ['messages' => $messages, 'listUser' => $listUser]);
+        $view->render('messagerie');
     }
     public function showMessagerieList()
     {
@@ -64,5 +59,19 @@ class UserController
 
         header('Content-Type: application/json');
         echo json_encode($Conversation);
+    }
+    public function AddMessage()
+    {
+        Access::checkUserLoggedIn();
+        $message =  Utils::request('message');
+        $receiverId =  Utils::request('userId');
+        if (!isset($receiverId) || !isset($message)) {
+            throw new Exception("Veuillez remplir tous les champs");
+        }
+        $userManager = new UserManager();
+        $userManager->addMessage($message, $receiverId);
+        header('Content-Type: application/json');
+        echo json_encode("done");
+
     }
 }
