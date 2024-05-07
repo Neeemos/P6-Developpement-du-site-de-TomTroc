@@ -3,13 +3,13 @@
 class Book extends AbstractEntity
 {
     private string $pseudo = "";
-    private string $userImage = "";
+    private string|null $userImage = "";
     private int $userId;
     private string $title = "";
     private string $author = "";
     private string $description;
     private int $available;
-    private string $image;
+    private string|null $image;
 
 
     /**
@@ -70,12 +70,12 @@ class Book extends AbstractEntity
         return $this->userImage;
     }
 
-    public function setuserImage(string $userImage): void
+    public function setuserImage(string|null $userImage): void
     {
         $this->userImage = $userImage;
     }
 
-    public function getuserId(): string
+    public function getuserId(): string|null
     {
         return $this->userId;
     }

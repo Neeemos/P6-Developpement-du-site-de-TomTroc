@@ -30,7 +30,6 @@ try {
             if (isset($query)) {
                 $bookController = new BookController();
                 $bookController->ShowBooksByNameOrAutor($query);
-
             } else {
                 $bookController = new BookController();
                 $bookController->showBooks();
@@ -56,16 +55,31 @@ try {
             if (isset($bookId)) {
                 $bookController = new BookController();
                 $bookController->editBook();
-
             } else {
                 $bookController = new BookController();
                 $bookController->showEditBook($id);
             }
             break;
-            case "deleteBook":
-                $userController = new BookController();
-                $userController->deleteBook();
-                break;
+        case "deleteBook":
+            $userController = new BookController();
+            $userController->deleteBook();
+            break;
+        case "messagerie":
+            $userController = new UserController();
+            $userController->showMessagerie();
+            break;
+        case "getMessagerieList":
+            $userController = new UserController();
+            $userController->showMessagerieList();
+            break;
+        case "getConversationMessages":
+            $userController = new UserController();
+            $userController->showConversationMessages();
+            break;
+        case "addMessage": 
+            $userController = new UserController();
+            $userController->addMessage();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

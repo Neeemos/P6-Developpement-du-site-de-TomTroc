@@ -85,4 +85,84 @@ class UserManager extends AbstractEntityManager
         }
         return new User($result);
     }
+
+    public function getUserListMessage()
+    {
+        $sql = "
+        SELECT 
+        m.id_sender,
+        m.id_receiver,
+        m.message AS message,
+        m.date AS date,
+        u.pseudo AS pseudo,
+        u.image AS image,
+        :user_id AS session_id
+    FROM 
+        messages m
+    JOIN 
+        users u ON u.id = CASE 
+                            WHEN m.id_sender = :user_id THEN m.id_receiver
+                            ELSE m.id_sender
+                         END
+    WHERE 
+        (m.id_receiver = :user_id OR m.id_sender = :user_id)
+        AND m.date = (
+            SELECT MAX(date)
+            FROM messages
+            WHERE (id_sender = m.id_sender AND id_receiver = m.id_receiver)
+                OR (id_sender = m.id_receiver AND id_receiver = m.id_sender)
+        )
+    ORDER BY 
+        date DESC;  ";
+
+        $params = [
+            "user_id" => $_SESSION['user']->getId()
+        ];
+        $stmt = $this->db->query($sql, $params);
+        $stmt->execute($params);
+
+        $list = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $list[] = $row;
+        }
+
+        return $list;
+    }
+    public function getConversationMessages(int $conversationId)
+    {
+        $sql = "SELECT messages.*, 
+        user.image AS image, 
+        :user_id AS session_id 
+ FROM messages
+ LEFT JOIN users AS user ON user.id = :receiver_id
+ WHERE (id_sender = :user_id AND id_receiver = :receiver_id) 
+    OR (id_sender = :receiver_id AND id_receiver = :user_id) 
+ ORDER BY date ASC";
+
+        $params = [
+            "user_id" => $_SESSION['user']->getId(),
+            "receiver_id" => $conversationId
+        ];
+        $stmt = $this->db->query($sql, $params);
+        $stmt->execute($params);
+
+        $conversation = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $conversation[] = $row;
+        }
+
+        return $conversation;
+
+    }
+    public function addMessage(string $message, int $receiverId)
+    {
+        $sql = "INSERT INTO messages (id, message, date, id_sender, id_receiver) VALUES (null, :message, NOW(), :id_sender, :id_receiver)";
+        $params = [
+            "id_sender" => $_SESSION['user']->getId(),
+            "id_receiver" => $receiverId,
+            "message" => $message
+        ];
+        $stmt = $this->db->query($sql, $params);
+
+    }
 }

@@ -13,10 +13,11 @@ if ($interval->y > 0) {
 } else {
     $avatar__Date = "Membre depuis aujourd'hui";
 }
+
 ?>
 
 <section class="profile__avatar avatar">
-    <img class="avatar__img" src="images/darwin-vegher.jpg" alt="photo de profile">
+    <img class="avatar__img" src="images/<?= isset($user->image) ? $user->image : 'darwin-vegher.jpg' ?>" alt="photo de profile">
     <input class="avatar__input" type="file" id="avatar" value="modifier" name="avatar" accept="image/png, image/jpeg">
     <label class="avatar__label" for="avatar">modifier</label>
     <div class="avatar__line"></div>
