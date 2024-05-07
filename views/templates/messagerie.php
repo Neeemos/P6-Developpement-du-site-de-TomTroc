@@ -16,7 +16,7 @@
             <form class="botdiscussion__form" id="add-message-form" method="POST" action="index.php?action=addMessage">
                 <input class="botdiscussion__input" id="add-message" name="message"
                     placeholder="Tapez votre message ici" required>
-                <input name="userId" id="user-id-input" hidden="true">
+                <input name="userId" id="user-id-input" hidden>
                 <input class="button button-green botdiscussion__button" id="submit-button" type="submit"
                     value="Envoyer">
             </form>

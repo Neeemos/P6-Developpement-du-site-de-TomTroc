@@ -18,7 +18,7 @@ if ($interval->y > 0) {
 
 <section class="profile__avatar avatar">
     <img class="avatar__img" src="images/<?= isset($user->image) ? $user->image : 'darwin-vegher.jpg' ?>" alt="photo de profile">
-    <input class="avatar__input" type="file" id="avatar" value="modifier" name="avatar" accept="image/png, image/jpeg">
+    <input class="avatar__input" type="file" id="avatar"  name="avatar" accept="image/png, image/jpeg">
     <label class="avatar__label" for="avatar">modifier</label>
     <div class="avatar__line"></div>
     <h2 class="avatar__title">
