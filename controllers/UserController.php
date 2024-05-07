@@ -63,15 +63,19 @@ class UserController
     public function AddMessage()
     {
         Access::checkUserLoggedIn();
-        $message =  Utils::request('message');
-        $receiverId =  Utils::request('userId');
+        $message = Utils::request('message');
+        $receiverId = Utils::request('userId');
         if (!isset($receiverId) || !isset($message)) {
             throw new Exception("Veuillez remplir tous les champs");
         }
         $userManager = new UserManager();
         $userManager->addMessage($message, $receiverId);
+        $returnmessages = array(
+            "date" => date("Y-m-d H:i:s"),
+            "message" => $message
+        );
         header('Content-Type: application/json');
-        echo json_encode("done");
+        echo json_encode($returnmessages);
 
     }
 }

@@ -6,6 +6,7 @@ class User extends AbstractEntity
     public string $email;
     public string $password;
     public string $register_date;
+    public string|null $image;
 
 
     public function setPseudo(string $pseudo): void
@@ -47,5 +48,13 @@ class User extends AbstractEntity
     public function getRegisterDate(): string
     {
         return $this->register_date;
+    }
+    public function setimage(string|null $image): void
+    {
+        $this->image = $image;
+    }
+    public function getimage(): string
+    {
+        return $this->image;
     }
 }

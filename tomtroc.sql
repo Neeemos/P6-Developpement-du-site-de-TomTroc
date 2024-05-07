@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 24 avr. 2024 à 13:28
+-- Généré le : mar. 07 mai 2024 à 13:40
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -51,27 +51,6 @@ INSERT INTO `books` (`id`, `user_id`, `title`, `author`, `description`, `availab
 -- --------------------------------------------------------
 
 --
--- Structure de la table `chats`
---
-
-CREATE TABLE `chats` (
-  `id` int(11) NOT NULL,
-  `user_1` int(11) DEFAULT NULL,
-  `user_2` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `chats`
---
-
-INSERT INTO `chats` (`id`, `user_1`, `user_2`) VALUES
-(1, 1, 2),
-(2, 2, 3),
-(3, 3, 1);
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `messages`
 --
 
@@ -89,9 +68,10 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`id`, `message`, `date`, `id_sender`, `id_receiver`) VALUES
 (4, 'Bonjour', '2024-04-21 17:30:32', 6, 7),
-(5, 'Bonsoir, tu viens demain au restaurant?', '2024-04-21 17:30:35', 7, 6),
-(6, 'Bonjour2\r\n', '2024-04-21 17:30:32', 6, 7),
-(7, 'Bonjour2\r\n', '2024-04-21 17:30:32', 3, 6);
+(5, 'Bonsoir, tu viens demain au restaurant? Bonjour2\nReceiver id 6', '2024-04-21 17:30:35', 7, 6),
+(6, 'Oui', '2024-04-21 17:50:32', 6, 7),
+(7, 'Bonjour', '2024-04-21 17:30:38', 3, 6),
+(8, 'Bonjour', '2024-04-21 17:30:32', 1, 7);
 
 -- --------------------------------------------------------
 
@@ -116,9 +96,11 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `password`, `pseudo`, `num_livre`, `register_date`, `image`) VALUES
 (1, 'utilisateur1@gmail.com', 'motdepasse1', 'pseudo1', 123, '2024-02-01 08:30:00', 'darwin-vegher.jpg'),
 (2, 'utilisateur2@gmail.com', 'motdepasse2', 'pseudo2', 456, '2024-02-01 09:15:00', 'darwin-vegher.jpg'),
-(3, 'utilisateur3@gmail.com', 'motdepasse3', 'Username3', 789, '2024-02-01 10:00:00', 'darwin-vegher.jpg'),
-(6, 'inscription@inscription.com', '$2y$10$m.IwjLaIRTAoogWavl08feUfEpdlQyFeyP9i.1LXBrsiy5qRyQyOu', 'inscription', 0, '2024-02-06 17:19:21', 'darwin-vegher.jpg'),
-(7, 'test@gmail.com', '$2y$10$zQdeIOXYKSQicDign7ZwT.lDhGLcU7RmDpqwt3UHOvv9ma9Nli6Ym', 'test', 0, '2024-02-23 09:34:16', NULL);
+(3, 'utilisateur3@gmail.com', 'motdepasse3', 'Demo 3', 789, '2024-02-01 10:00:00', NULL),
+(6, 'inscription@inscription.com', '$2y$10$m.IwjLaIRTAoogWavl08feUfEpdlQyFeyP9i.1LXBrsiy5qRyQyOu', 'Demo', 0, '2024-02-06 17:19:21', 'darwin-vegher.jpg'),
+(7, 'test@gmail.com', '$2y$10$zQdeIOXYKSQicDign7ZwT.lDhGLcU7RmDpqwt3UHOvv9ma9Nli6Ym', 'Demo 7', 0, '2024-02-23 09:34:16', NULL),
+(8, 'azazaza@azazaza.com', '$2y$10$V90Sm2xOfb2xmjtpkw7PLuwMQsxsFIkHp6.okL6SHsSCwjxyD7NyS', 'Demo 8', 0, '2024-04-25 15:30:45', NULL),
+(9, 'alala@alala.com', '$2y$10$ffi9imixl233jstdzb2tcezyYa7IhK9uh5Ji6zxFzcdudTZq4Cnmu', 'alala', 0, '2024-05-06 15:55:34', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -130,14 +112,6 @@ INSERT INTO `users` (`id`, `email`, `password`, `pseudo`, `num_livre`, `register
 ALTER TABLE `books`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
-
---
--- Index pour la table `chats`
---
-ALTER TABLE `chats`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_1` (`user_1`),
-  ADD KEY `user_2` (`user_2`);
 
 --
 -- Index pour la table `messages`
@@ -164,22 +138,16 @@ ALTER TABLE `books`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT pour la table `chats`
---
-ALTER TABLE `chats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Contraintes pour les tables déchargées
@@ -190,13 +158,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `books`
   ADD CONSTRAINT `books_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Contraintes pour la table `chats`
---
-ALTER TABLE `chats`
-  ADD CONSTRAINT `chats_ibfk_1` FOREIGN KEY (`user_1`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `chats_ibfk_2` FOREIGN KEY (`user_2`) REFERENCES `users` (`id`);
 
 --
 -- Contraintes pour la table `messages`
