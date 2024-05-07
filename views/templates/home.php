@@ -9,7 +9,6 @@
         <img class="content__img" src="images/hamza-nouasria.jpg" alt="Photo d'Hamza Nousaria">
         <p class="content__autor">Hamza
     </div>
-    </div>
 </section>
 
 <section class="lastbook">
@@ -22,13 +21,13 @@
 
 <section class="information">
     <h2 class="information__title">Comment ça marche ?</h2>
-    <p class="information__text">Échanger des livres avec TomTroc c’est simple et </br> amusant ! Suivez ces étapes pour
+    <p class="information__text">Échanger des livres avec TomTroc c’est simple et <br> amusant ! Suivez ces étapes pour
         commencer :</p>
     <div class="information__card infocard">
-        <div class="infocard__card">Inscrivez-vous </br> gratuitement sur </br> notre plateforme.</div>
-        <div class="infocard__card">Ajoutez les livres que vous </br> souhaitez échanger à </br> votre profil.</div>
-        <div class="infocard__card">Parcourez les livres </br> disponibles chez d'autres </br> membres.</div>
-        <div class="infocard__card">Proposez un échange et </br> discutez avec d'autres </br> passionnés de lecture.
+        <div class="infocard__card">Inscrivez-vous <br> gratuitement sur <br> notre plateforme.</div>
+        <div class="infocard__card">Ajoutez les livres que vous <br> souhaitez échanger à <br> votre profil.</div>
+        <div class="infocard__card">Parcourez les livres <br> disponibles chez d'autres <br> membres.</div>
+        <div class="infocard__card">Proposez un échange et <br> discutez avec d'autres <br> passionnés de lecture.
         </div>
     </div>
     <a href="#" class="button button-border-green">Voir tous les livres</a>
