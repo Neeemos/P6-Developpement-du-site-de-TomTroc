@@ -86,7 +86,7 @@ class BookManager extends AbstractEntityManager
     /**
      * Récupère le livre par son nom ou son auteur.
      * @param string $query
-     * @return Book|null
+     * @return Book|null|string
      */
     public function getBookByNameOrAutor(?string $query = null)
     {
@@ -114,7 +114,7 @@ class BookManager extends AbstractEntityManager
      * @param book $book
      * @return Book
      */
-    public function updateBook(?book $book )
+    public function updateBook(?book $book)
     {
         $sql = "UPDATE books SET title = :title, author = :author, description = :description, available = :available WHERE id = :id";
         $result = $this->db->query($sql, [
@@ -126,19 +126,49 @@ class BookManager extends AbstractEntityManager
         ]);
 
         if ($result) {
-            return $book; 
-        } 
+            return $book;
+        }
+        return new book();
     }
     /**
      * supprime un livre
      * @param book $book
-     * @return Book
+     *
      */
-    public function deleteBook(?book $book )
+    public function deleteBook(?book $book)
     {
         $sql = "DELETE FROM books WHERE id = :id";
         $result = $this->db->query($sql, ['id' => $book->getId()]);
-
     }
+    public function editImage($file_name, $file_tmp, $bookId)
+    {
 
+        $sql = "UPDATE books SET image = :image WHERE id = :bookId AND user_id = :id";
+        $params = [
+            "image" => $file_name,
+            "id" => $_SESSION['user']->getId(),
+            "bookId" => $bookId
+        ];
+        $stmt = $this->db->query($sql, $params);
+        $upload_dir = 'images/';
+        move_uploaded_file($file_tmp, $upload_dir . $file_name);
+    }
+    public function addBook($book)
+    {
+        $sql = "INSERT books (user_id, title, author, description, available) VALUES (:userId, :title, :author, :description, :available)";
+        $result = $this->db->query($sql, [
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'description' => $book->getDescription(),
+            'available' => $book->getAvailable(),
+            'userId' => $_SESSION['user']->getId()
+        ]);
+        $lastId = $this->db->getPDO();
+        $lastId = $lastId->lastInsertId();
+        if ($result) {
+            $book->setId($lastId);
+            return $book;
+        }
+        return new book();
+    }
 }

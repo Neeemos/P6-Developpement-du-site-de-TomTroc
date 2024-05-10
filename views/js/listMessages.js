@@ -11,10 +11,26 @@ function fetchMessagerieList() {
                 const overlayCard = createOverlayCard(user);
                 messageOverlay.appendChild(overlayCard);
             });
+
+            // Check if URL contains an id parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const userIdParam = urlParams.get('id');
+            if (userIdParam) {
+                // Execute updateHeader with userId from id parameter
+                fetchUserInfo(userIdParam);
+            }
         })
         .catch(error => console.error('Error fetching messagerie list:', error));
 }
-
+function fetchUserInfo(userId) {
+    fetch(`index.php?action=userInfo&userId=${userId}`)
+        .then(response => response.json())
+        .then(user => {
+            // Execute updateHeader with user information
+            updateHeader(userId, user);
+        })
+        .catch(error => console.error('Error fetching user information:', error));
+}
 function createOverlayCard(user) {
     const overlayCard = document.createElement('div');
     overlayCard.classList.add('overlay__card');
@@ -66,9 +82,11 @@ function createOverlayCard(user) {
 }
 
 function updateHeader(userId, user) {
+    console.log(user);
     const header = document.querySelector('.discussion__top.topdiscussion');
     header.innerHTML = '';
-
+    const userIdInput = document.querySelector('input[name="userId"]');
+    userIdInput.value = userId;
     const headerIcon = document.createElement('a');
     headerIcon.classList.add('topdiscussion__icon');
     headerIcon.href = '#';
@@ -80,6 +98,7 @@ function updateHeader(userId, user) {
 
     const headerImage = document.createElement('img');
     headerImage.classList.add('topdiscussion__image');
+
     headerImage.src = user.image ? 'images/' + user.image : 'images/darwin-vegher.jpg';
     headerImage.alt = 'Photo de profil';
 
@@ -113,8 +132,6 @@ function fetchAndDisplayConversationMessages(userId) {
         .then(response => response.json())
         .then(data => {
             const messageDiscussion = document.querySelector('.discussion__messages.messages');
-            const userIdInput = document.querySelector('input[name="userId"]');
-            userIdInput.value = userId;
             messageDiscussion.innerHTML = '';
 
             data.forEach(message => {

@@ -31,6 +31,12 @@
                         class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "showBooks")) ? 'active' : "" ?>">
                         <a href="index.php?action=showBooks" class="navbar__link">Nos livres à l'échange</a>
                     </li>
+                    <?php if (isset($_SESSION["user"])) { ?>
+                        <li class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "ajoutLivre")) ? 'active' : "" ?>">
+                        <a href="index.php?action=ajoutLivre" class="navbar__link">Ajouter
+                            un livre</a>
+                        </li>
+                    <?php } ?>
                     <li
                         class="navbar__item <?= (isset($_GET['action']) && !empty($_GET['action'] == "messagerie")) ? 'active' : "" ?>">
                         <a href="index.php?action=messagerie" class="navbar__link"><i
@@ -71,6 +77,10 @@
     </footer>
     <?= (isset($_GET['action']) && !empty($_GET['action'] == "showBooks")) ? '<script src="views/js/filterbooks.js"></script>' : "" ?>
     <?= (isset($_GET['action']) && !empty($_GET['action'] == "messagerie")) ? '<script src="views/js/listMessages.js"></script>' : "" ?>
+    <?php
+    if (isset($_GET["action"]) && ($_GET["action"] === "profile" || $_GET["action"] === "editBook")) {
+        echo '<script src="views/js/profilePicture.js"></script>';
+    } ?>
 </body>
 
 </html>

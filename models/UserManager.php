@@ -165,4 +165,28 @@ class UserManager extends AbstractEntityManager
         $stmt = $this->db->query($sql, $params);
 
     }
+    public function addImage($file_name, $file_tmp)
+    {
+        $sql = "UPDATE users SET image = :image WHERE id = :id";
+        $params = [
+            "image" => $file_name,
+            "id" => $_SESSION['user']->getId()
+        ];
+        $stmt = $this->db->query($sql, $params);
+        $upload_dir = 'images/';
+        move_uploaded_file($file_tmp, $upload_dir . $file_name);
+        $_SESSION['user']->setImage($file_name);
+    }
+    public function getUserInfo(int $id)
+    {
+
+        $sql = "SELECT image,pseudo FROM users WHERE id = :id";
+        $params = ["id" => $id];
+        $result = $this->db->query($sql, $params);
+        $user = $result->fetch();
+        if ($user) {
+            return new User($user);
+        }
+
+    }
 }

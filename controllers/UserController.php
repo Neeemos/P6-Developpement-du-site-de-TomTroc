@@ -64,11 +64,15 @@ class UserController
     {
         Access::checkUserLoggedIn();
         $message = Utils::request('message');
-        $receiverId = Utils::request('userId');
+        $receiverId = (int) Utils::request('userId');
         if (!isset($receiverId) || !isset($message)) {
             throw new Exception("Veuillez remplir tous les champs");
         }
         $userManager = new UserManager();
+        $userManager->getUserById($receiverId);
+        if (!$receiverId) {
+            throw new Exception("L'utilisateur n'existe pas");
+        }
         $userManager->addMessage($message, $receiverId);
         $returnmessages = array(
             "date" => date("Y-m-d H:i:s"),
@@ -76,6 +80,43 @@ class UserController
         );
         header('Content-Type: application/json');
         echo json_encode($returnmessages);
+
+    }
+    public function addImage()
+    {
+        Access::checkUserLoggedIn();
+        $file_name = $_FILES['avatar']['name'];
+        $file_tmp = $_FILES['avatar']['tmp_name'];
+        // Obtenir l'extension du fichier
+        $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+        // Liste des extensions autorisées
+        $allowed_extensions = array('jpg', 'jpeg', 'png');
+
+        if (in_array($file_extension, $allowed_extensions)) {
+            $userManager = new UserManager();
+            $userManager->addImage($file_name, $file_tmp);
+            Utils::redirect("profile");
+
+        } else {
+            throw new Exception("Veuillez verifier votre fichier");
+        }
+
+    }
+    public function userInfo()
+    {
+        Access::checkUserLoggedIn();
+        $userId = Utils::request('userId');
+        $userManager = new UserManager();
+        $userInfo = $userManager->getUserInfo($userId);
+        header('Content-Type: application/json');
+        echo json_encode($userInfo);
+    }
+    public function ajouterLivre()
+    {
+        Access::checkUserLoggedIn();
+        $view = new View('ShowEditBook');
+        $view->render('editBook');
 
     }
 }

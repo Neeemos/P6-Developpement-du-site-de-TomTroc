@@ -2,16 +2,24 @@
 
 class Book extends AbstractEntity
 {
+    protected int $id = 0;
     private string $pseudo = "";
     private string|null $userImage = "";
     private int $userId;
     private string $title = "";
     private string $author = "";
-    private string $description;
-    private int $available;
+    private string $description = "";
+    private int $available = 1;
     private string|null $image;
 
-
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+    public function getId(): int
+    {
+        return $this->id;
+    }
     /**
      * Getter pour le titre du livre.
      * @return string
@@ -54,18 +62,18 @@ class Book extends AbstractEntity
         $this->author = $author;
     }
 
-    public function getimage(): string
+    public function getimage(): string|null
     {
         return $this->image;
     }
 
-    public function setimage(string $image): void
+    public function setimage(string|null $image): void
     {
         $this->image = $image;
     }
 
     
-    public function getuserImage(): string
+    public function getuserImage(): string|null
     {
         return $this->userImage;
     }

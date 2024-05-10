@@ -76,9 +76,29 @@ try {
             $userController = new UserController();
             $userController->showConversationMessages();
             break;
-        case "addMessage": 
+        case "addMessage":
             $userController = new UserController();
             $userController->addMessage();
+            break;
+        case "uploadPhoto":
+            $userController = new UserController();
+            $userController->addImage();
+            break;
+        case "editBookPhoto":
+            $userController = new BookController();
+            $userController->editImage();
+            break;
+        case "userInfo":
+            $userController = new UserController();
+            $userController->userInfo();
+            break;
+        case "ajoutLivre":
+            $userController = new UserController();
+            $userController->ajouterLivre();
+            break;
+        case "ajouterLivre":
+            $BookController = new BookController();
+            $BookController->ajouterLivre();
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");
